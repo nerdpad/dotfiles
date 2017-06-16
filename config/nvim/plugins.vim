@@ -20,6 +20,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'nerdpad/dracula-vim'
 " Plug 'joshdick/onedark.vim'
 Plug 'chriskempson/base16-vim'
+Plug 'w0ng/vim-hybrid'
 
 " utilities
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind', 'NERDTreeTabsToggle', 'NERDTreeTabsFind', 'NERDTreeClose'] } | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons' | Plug 'jistr/vim-nerdtree-tabs' " file drawer

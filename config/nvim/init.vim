@@ -49,11 +49,13 @@ endif
 let g:onedark_termcolors=256
 let g:onedark_terminal_italics=1
 let g:dracula_terminal_italics=1
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 
 syntax on
 set t_Co=256                  " Explicitly tell vim that the terminal supports 256 colors
 set background=dark           " Enable dark background
-colorscheme dracula           " Set the colorscheme
+colorscheme hybrid           " Set the colorscheme
 
 " make the highlighting of tabs and other non-text less annoying
 highlight SpecialKey ctermbg=none ctermfg=8
@@ -390,7 +392,7 @@ let g:neomake_javascript_enabled_makers = ['jshint', 'eslint']
 let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline_theme='dracula'
+let g:airline_theme='hybrid'
 let g:airline#extensions#tabline#enabled = 1 " enable airline tabline
 let g:airline#extensions#tabline#tab_min_count = 2 " only show tabline if tabs are being used (more than 1 tab open)
 let g:airline#extensions#tabline#show_buffers = 0 " do not show open buffers in tabline
