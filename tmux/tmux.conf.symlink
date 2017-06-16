@@ -74,6 +74,9 @@ bind l select-pane -R
 # navigate between windows
 bind -r C-h select-window -t :-
 bind -r C-l select-window -t :+
+# reorder window
+bind -n S-Left swap-window -t -1
+bind -n S-Right swap-window -t +1
 
 # Resize pane shortcuts
 bind -r H resize-pane -L 10
