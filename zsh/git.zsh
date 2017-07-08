@@ -12,6 +12,7 @@ alias gmv='git mv'
 alias grm='git rm'
 alias grn='git-rename'
 alias glog="git l"
+alias gdaf='git apply --ignore-space-change --ignore-whitespace'
 
 # alias git-amend='git commit --amend -C HEAD'
 alias git-undo='git reset --soft HEAD~1'

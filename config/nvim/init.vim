@@ -50,7 +50,7 @@ let g:onedark_termcolors=256
 let g:onedark_terminal_italics=1
 let g:dracula_terminal_italics=1
 let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+" let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 
 syntax on
 set t_Co=256                  " Explicitly tell vim that the terminal supports 256 colors
@@ -512,3 +512,10 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
+
+" Style overrides
+" italics
+highlight Comment cterm=italic
+" NeoMake
+" highlight NeomakeErrorSignCustom ctermfg=1 ctermbg=237
+" let g:neomake_error_sign={'text': '⚠', 'texthl': 'NeomakeErrorSignCustom'}

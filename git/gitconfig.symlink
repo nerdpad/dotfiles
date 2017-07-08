@@ -134,8 +134,9 @@
     renames = copies
     mnemonicprefix = true
     compactionHeuristic = true
+	tool = vimdiff
 [difftool]
-    prompt = false
+	prompt = false
 [apply]
     # do not warn about missing whitespace at EOF
     whitespace = nowarn

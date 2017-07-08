@@ -1,6 +1,7 @@
 setlocal textwidth=120
 
-let g:neomake_javascript_enabled_makers = filereadable('.jshintrc') ? ['jshint'] : ['eslint']
+" let g:neomake_javascript_enabled_makers = filereadable('.jshintrc') ? ['jshint'] : ['eslint']
+let g:neomake_javascript_enabled_makers = filereadable('.eslintrc') ? ['eslint'] : ['jshint']
 let g:jsx_ext_required = 0
 let g:javascript_plugin_jsdoc = 1
 
