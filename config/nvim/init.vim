@@ -51,11 +51,12 @@ let g:onedark_terminal_italics=1
 let g:dracula_terminal_italics=1
 let g:hybrid_custom_term_colors = 1
 " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+let g:one_allow_italics = 1
 
 syntax on
 set t_Co=256                  " Explicitly tell vim that the terminal supports 256 colors
 set background=dark           " Enable dark background
-colorscheme hybrid           " Set the colorscheme
+colorscheme one           " Set the colorscheme
 
 " make the highlighting of tabs and other non-text less annoying
 highlight SpecialKey ctermbg=none ctermfg=8
@@ -283,8 +284,6 @@ augroup configgroup
 
     autocmd BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
 
-    autocmd! BufWritePost * Neomake
-
     " JsBeautify Shortcuts
     """""""""""""""""""""""""""""""""""""
     " autoformat code
@@ -374,18 +373,32 @@ nmap <leader>m :MarkedOpen!<cr>
 nmap <leader>mq :MarkedQuit<cr>
 nmap <leader>* *<c-o>:%s///gn<cr>
 
-let g:ale_change_sign_column_color = 1
-let g:ale_sign_column_always = 1
+" Linting
+"""""""""""""""""""""""""""""""""""""
+let g:ale_change_sign_column_color = 0
+let g:ale_sign_column_always = 1          " always expand the gutter
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
-" highlight clear ALEErrorSign
-" highlight clear ALEWarningSign
+" highlight clear ALEErrorSign              " clear sign background color
+" highlight clear ALEWarningSign            " clear sign background color
+" hi SignColumn guibg=#282c34
+let g:airline#extensions#ale#enabled = 1  " Show linting error in AirLine
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" navigate between error/warnings
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" select subset of linters
+let g:ale_linters = {
+\   'javascript': ['eslint', 'jscs', 'jshint', 'standard', 'xo']
+\}
 
 " airline options
 let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline_theme='hybrid'
+let g:airline_theme='one'
 let g:airline#extensions#tabline#enabled = 1 " enable airline tabline
 let g:airline#extensions#tabline#tab_min_count = 2 " only show tabline if tabs are being used (more than 1 tab open)
 let g:airline#extensions#tabline#show_buffers = 0 " do not show open buffers in tabline
@@ -447,13 +460,6 @@ endif
 " alias and shortcut
 cnoreabbrev Ack Ack!
 nnoremap <leader>s :Ack!<space><c-r>=expand("<cword>")<cr>
-
-" move line/selection up down
-let g:move_map_keys = 0
-vmap <C-S-j> <Plug>MoveBlockDown
-vmap <C-S-k> <Plug>MoveBlockUp
-nmap <C-S-j> <Plug>MoveLineDown
-nmap <C-S-k> <Plug>MoveLineUp
 
 " Limelight, Goyo - Focus writing
 let g:goyo_width=100
