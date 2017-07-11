@@ -221,7 +221,7 @@ map <leader>wc :wincmd q<cr>
 
 " toggle cursor line
 nnoremap <leader>i :set cursorline!<cr>
-" set cursorline
+set cursorline
 
 " scroll the viewport faster
 nnoremap <C-e> 3<C-e>
@@ -253,6 +253,9 @@ nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 nmap <silent> <Leader>a mz<Plug>(EasyAlign)ip=`z
 " nmap <silent> <Leader>a: mz<Plug>(EasyAlign)ip:`z
+
+command! Rm call functions#Delete()
+command! RM call functions#Delete() <Bar> q!
 
 " }}}
 
@@ -371,22 +374,12 @@ nmap <leader>m :MarkedOpen!<cr>
 nmap <leader>mq :MarkedQuit<cr>
 nmap <leader>* *<c-o>:%s///gn<cr>
 
-let g:neomake_javascript_jshint_maker = {
-    \ 'args': ['--verbose'],
-    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-\ }
-
-let g:neomake_typescript_tsc_maker = {
-    \ 'args': ['-m', 'commonjs', '--noEmit' ],
-    \ 'append_file': 0,
-    \ 'errorformat':
-        \ '%E%f %#(%l\,%c): error %m,' .
-        \ '%E%f %#(%l\,%c): %m,' .
-        \ '%Eerror %m,' .
-        \ '%C%\s%\+%m'
-\ }
-
-let g:neomake_javascript_enabled_makers = ['jshint', 'eslint']
+let g:ale_change_sign_column_color = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+" highlight clear ALEErrorSign
+" highlight clear ALEWarningSign
 
 " airline options
 let g:airline_powerline_fonts=1
@@ -512,10 +505,3 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
-
-" Style overrides
-" italics
-highlight Comment cterm=italic
-" NeoMake
-" highlight NeomakeErrorSignCustom ctermfg=1 ctermbg=237
-" let g:neomake_error_sign={'text': '⚠', 'texthl': 'NeomakeErrorSignCustom'}
