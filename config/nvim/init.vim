@@ -375,7 +375,7 @@ nmap <leader>* *<c-o>:%s///gn<cr>
 
 " Linting
 """""""""""""""""""""""""""""""""""""
-let g:ale_change_sign_column_color = 0
+let g:ale_change_sign_column_color = 1
 let g:ale_sign_column_always = 1          " always expand the gutter
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'

@@ -52,7 +52,8 @@ Plug 'AndrewRadev/splitjoin.vim' " single/multi line code handler: gS - split on
 Plug 'vim-scripts/matchit.zip' " extended % matching
 Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
 Plug 'sickill/vim-pasta' " context-aware pasting
-Plug 'webdevel/tabulous' " better tabline, and tab labels
+" Plug 'webdevel/tabulous' " better tabline, and tab labels
+Plug 'bagrat/vim-workspace'
 Plug 'junegunn/vim-easy-align' " Better alignment
 Plug 'airblade/vim-gitgutter' " Show git changes in gutter
 Plug 'junegunn/limelight.vim' " Hyperfocus-writing in Vim
