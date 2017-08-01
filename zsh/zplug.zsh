@@ -17,7 +17,7 @@ if [ -z ${RELOAD} ]; then
     zplug 'djui/alias-tips'
 
     # export NVM_LAZY_LOAD=true
-    export NVM_AUTO_USE=true
+    export NVM_AUTO_USE=false
     zplug 'lukechilds/zsh-nvm'
 
     # git

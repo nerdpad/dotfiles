@@ -28,3 +28,6 @@ tscommand*.txt
 
 # npm things
 npm-debug.log
+
+# misc
+zz_changes.patch
