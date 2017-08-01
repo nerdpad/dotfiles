@@ -83,7 +83,7 @@ Plug 'mxw/vim-jsx', { 'for': ['javascript.jsx', 'javascript'] } " JSX support
 Plug 'maksimr/vim-jsbeautify', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'html', 'css', 'json'], 'do': 'git submodule update --init --recursive' } " Code formatting
 
 " TypeScript
-Plug 'jason0x43/vim-tss', { 'for': 'typescript', 'do': 'npm install' }
+Plug 'jason0x43/vim-tss', { 'for': ['typescript', 'javascript', 'javascript.jsx'], 'do': 'npm install' }
 " Plug 'Quramy/tsuquyomi', { 'for': 'typescript', 'do': 'npm install' } " extended typescript support - works as a client for TSServer
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' } " typescript support
 

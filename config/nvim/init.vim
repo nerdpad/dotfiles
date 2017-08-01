@@ -8,6 +8,8 @@ abbr teh the
 abbr tempalte template
 abbr fitler filter
 abbr cosnt const
+abbr attribtue attribute
+abbr attribuet attribute
 
 set nocompatible            " not compatible with vi
 set autoread                " detect when a file is changed
@@ -18,7 +20,7 @@ set textwidth=180
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
-let g:python_host_prog = '/usr/local/bin/python'
+let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 if (has('nvim'))
@@ -59,8 +61,8 @@ set background=dark           " Enable dark background
 colorscheme one           " Set the colorscheme
 
 " make the highlighting of tabs and other non-text less annoying
-highlight SpecialKey ctermbg=none ctermfg=8
-highlight NonText ctermbg=none ctermfg=8
+highlight SpecialKey ctermbg=none ctermfg=236
+highlight NonText ctermbg=none ctermfg=236
 
 " make comments and HTML attributes italic
 highlight Comment cterm=italic
@@ -219,6 +221,16 @@ map <silent> <C-k> :call functions#WinMove('k')<cr>
 map <silent> <C-l> :call functions#WinMove('l')<cr>
 
 map <leader>wc :wincmd q<cr>
+
+" move line mappings
+" ∆ is <A-j> on macOS
+" ˚ is <A-k> on macOS
+nnoremap ∆ :m .+1<cr>==
+nnoremap ˚ :m .-2<cr>==
+inoremap ∆ <Esc>:m .+1<cr>==gi
+inoremap ˚ <Esc>:m .-2<cr>==gi
+vnoremap ∆ :m '>+1<cr>gv=gv
+vnoremap ˚ :m '<-2<cr>gv=gv
 
 " toggle cursor line
 nnoremap <leader>i :set cursorline!<cr>
@@ -399,6 +411,11 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " select subset of linters
 let g:ale_linters = {
 \   'javascript': ['eslint', 'jscs', 'jshint', 'standard', 'xo']
+\}
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'typescript': ['tslint', 'tsserver']
 \}
 
 " airline options
