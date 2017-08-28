@@ -68,6 +68,7 @@ highlight NonText ctermbg=none ctermfg=236
 highlight Comment cterm=italic
 highlight htmlArg cterm=italic
 highlight xmlAttrib cterm=italic
+highlight Type cterm=italic
 highlight Normal ctermbg=none
 
 set number                  " show line numbers
@@ -411,6 +412,11 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " select subset of linters
 let g:ale_linters = {
 \   'javascript': ['eslint', 'jshint'],
+\   'typescript': ['tslint', 'tsserver']
+\}
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
 \   'typescript': ['tslint', 'tsserver']
 \}
 

@@ -70,6 +70,21 @@ fi
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# zplug config
+export ZPLUG_LOADFILE=$DOTFILES/zsh/zplug.sh
+
+# only source zplug on initial load
+if [ -z ${RELOAD} ]; then
+    if ! [ type "zplug" > /dev/null 2>&1 ]; then
+        source ~/.zplug/init.zsh
+    fi
+fi
+
+# npx command shell fallback
+if command_exists npx; then
+    source <(npx --shell-auto-fallback zsh)
+fi
+
 # Better history
 # Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
 autoload -U up-line-or-beginning-search
