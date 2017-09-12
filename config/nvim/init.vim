@@ -85,7 +85,7 @@ set breakindent
 
 " toggle invisible characters
 set list
-set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+set listchars=tab:→\ ,eol:¬,space:⋅,trail:⋅,extends:❯,precedes:❮
 set showbreak=↪
 
 " highlight conflicts
