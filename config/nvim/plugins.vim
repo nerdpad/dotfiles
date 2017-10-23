@@ -96,7 +96,7 @@ Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 " styles
 Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] } " markdown support
 Plug 'groenewege/vim-less', { 'for': 'less' } " less support
-Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background of hex color values to the color
+" Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background of hex color values to the color
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' } " CSS3 syntax support
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' } " sass scss syntax support
 

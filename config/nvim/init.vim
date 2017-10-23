@@ -33,6 +33,9 @@ endif
 
 " Section User Interface {{{
 
+syntax on
+set t_Co=256                " Explicitly tell vim that the terminal supports 256 colors"
+
 " switch cursor to line when in insert mode, and block when not
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
@@ -48,6 +51,12 @@ if (has('mac') && has("termguicolors"))
     set termguicolors
 endif
 
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+else
+	let g:onedark_termcolors=16
+	let g:onedark_terminal_italics=1
 let g:onedark_termcolors=256
 let g:onedark_terminal_italics=1
 let g:dracula_terminal_italics=1
@@ -55,14 +64,13 @@ let g:hybrid_custom_term_colors = 1
 " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 let g:one_allow_italics = 1
 
-syntax on
-set t_Co=256                  " Explicitly tell vim that the terminal supports 256 colors
-set background=dark           " Enable dark background
-colorscheme one           " Set the colorscheme
+set background=dark
+	colorscheme onedark
+endif
 
 " make the highlighting of tabs and other non-text less annoying
-highlight SpecialKey ctermbg=none ctermfg=236
-highlight NonText ctermbg=none ctermfg=236
+highlight SpecialKey ctermfg=236
+highlight NonText ctermfg=236
 
 " make comments and HTML attributes italic
 highlight Comment cterm=italic
@@ -105,6 +113,7 @@ set completeopt+=longest
 
 " code folding settings
 set foldmethod=syntax       " fold based on indent
+set foldlevelstart=99
 set foldnestmax=10          " deepest fold is 10 levels
 set nofoldenable            " don't fold by default
 set foldlevel=1
@@ -336,7 +345,7 @@ let g:fzf_layout = { 'down': '~25%' }
 
 if isdirectory(".git")
     " if in a git project, use :GFiles
-    nmap <silent> <leader>t :GFiles<cr>
+    nmap <silent> <leader>t :GFiles --cached --others --exclude-standard<cr>
 else
     " otherwise, use :FZF
     nmap <silent> <leader>t :FZF<cr>
@@ -418,7 +427,8 @@ let g:ale_linters = {
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'typescript': ['tslint', 'tsserver']
+\   'typescript': ['tslint', 'tsserver'],
+\	'html': []
 \}
 
 " airline options
