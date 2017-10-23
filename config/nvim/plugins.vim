@@ -78,7 +78,7 @@ Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] } " pug / jade support
 
 " JavaScript
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'html'] }
-Plug 'moll/vim-node', { 'for': 'javascript' } " node support
+Plug 'moll/vim-node', { 'for': ['javascript', 'javascript.jsx'] } " node support
 Plug 'mxw/vim-jsx', { 'for': ['javascript.jsx', 'javascript'] } " JSX support
 Plug 'maksimr/vim-jsbeautify', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'html', 'css', 'json'], 'do': 'git submodule update --init --recursive' } " Code formatting
 
