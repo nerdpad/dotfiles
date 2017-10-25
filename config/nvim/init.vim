@@ -24,14 +24,17 @@ let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 if (has('nvim'))
-	" show results of substition as they're happening
-	" but don't open a split
-	set inccommand=nosplit
+  " show results of substition as they're happening
+  " but don't open a split
+  set inccommand=nosplit
 endif
 
 " }}}
 
 " Section User Interface {{{
+
+syntax on
+set t_Co=256                " Explicitly tell vim that the terminal supports 256 colors"
 
 " switch cursor to line when in insert mode, and block when not
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
@@ -48,21 +51,18 @@ if (has('mac') && has("termguicolors"))
     set termguicolors
 endif
 
-let g:onedark_termcolors=256
-let g:onedark_terminal_italics=1
-let g:dracula_terminal_italics=1
-let g:hybrid_custom_term_colors = 1
-" let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-let g:one_allow_italics = 1
-
-syntax on
-set t_Co=256                  " Explicitly tell vim that the terminal supports 256 colors
-set background=dark           " Enable dark background
-colorscheme one           " Set the colorscheme
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+else
+  let g:one_allow_italics = 1
+  set background=dark
+  colorscheme one
+endif
 
 " make the highlighting of tabs and other non-text less annoying
-highlight SpecialKey ctermbg=none ctermfg=236
-highlight NonText ctermbg=none ctermfg=236
+highlight SpecialKey ctermfg=236
+highlight NonText ctermfg=236
 
 " make comments and HTML attributes italic
 highlight Comment cterm=italic
@@ -105,6 +105,7 @@ set completeopt+=longest
 
 " code folding settings
 set foldmethod=syntax       " fold based on indent
+set foldlevelstart=99
 set foldnestmax=10          " deepest fold is 10 levels
 set nofoldenable            " don't fold by default
 set foldlevel=1
@@ -336,7 +337,7 @@ let g:fzf_layout = { 'down': '~25%' }
 
 if isdirectory(".git")
     " if in a git project, use :GFiles
-    nmap <silent> <leader>t :GFiles<cr>
+    nmap <silent> <leader>t :GFiles --cached --others --exclude-standard<cr>
 else
     " otherwise, use :FZF
     nmap <silent> <leader>t :FZF<cr>
@@ -371,8 +372,8 @@ command! FZFMru call fzf#run({
 \  'down':    '40%'})
 
 command! -bang -nargs=* Find call fzf#vim#grep(
-	\ 'rg --column --line-number --no-heading --follow --color=always '.<q-args>, 1,
-	\ <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
+  \ 'rg --column --line-number --no-heading --follow --color=always '.<q-args>, 1,
+  \ <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
 
 " Emmet
 """""""""""""""""""""""""""""""""""""
@@ -412,16 +413,13 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " select subset of linters
 let g:ale_linters = {
-\   'javascript': ['eslint', 'jshint'],
-\   'typescript': ['tslint', 'tsserver']
-\}
-
-let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'typescript': ['tslint', 'tsserver']
+\   'typescript': [],
+\   'html': []
 \}
 
 " airline options
+""""""""""""""""""""""""""""""""""""""
 let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -435,22 +433,7 @@ let g:airline#extensions#tabline#show_splits = 0
 let g:vim_json_syntax_conceal = 0
 
 " completion
-" https://tinyurl.com/zkurrdk
-let g:deoplete#enable_at_startup = 1 " enable Deoplete
-call deoplete#custom#set('_', 'min_pattern_length', 1)
-let g:deoplete#enable_ignore_case = 'ignorecase'
-let g:deoplete#enable_smart_case = 1
-
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
-  \ 'jspc#omni'
-\]
-set completeopt=longest,menuone ",preview
-let g:deoplete#sources = {}
-let g:deoplete#sources['javascript'] = ['file', 'ultisnips', 'ternjs']
-let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
-"Add extra filetypes
+" Tern Add extra filetypes
 let g:tern#filetypes = [
                 \ 'jsx',
                 \ 'javascript.jsx',
@@ -458,17 +441,23 @@ let g:tern#filetypes = [
                 \ ]
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent', '--no-port-file']
+map <Leader>dt :TernDefTab<CR>
+map <Leader>dp :TernDefPreview<CR>
 
-aug omnicomplete
-  au!
-  au FileType javascript,jsx,javascript.jsx setl omnifunc=tern#Complete
-aug END
-
-" supertab
-let g:SuperTabCrMapping = 0
-autocmd FileType javascript,javascript.jsx,jsx let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-let g:UltiSnipsExpandTrigger="<C-j>"
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" YouCompleteMe
+"""""""""""""""""""""""""""""""""""""
+let g:ycm_auto_trigger = 1
+let g:ycm_always_populate_location_list = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+map <Leader>e :YcmDiags<CR> 
+let g:ycm_error_symbol = '✖'
+let g:ycm_warning_symbol = '⚠'
+function! s:CustomizeYcmLocationWindow()
+  10wincmd _
+endfunction
+autocmd User YcmLocationOpened call s:CustomizeYcmLocationWindow()
+let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 
 " git gutter
 let g:gitgutter_realtime = 1
@@ -509,7 +498,7 @@ function! s:goyo_enter()
   cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
 
   " close NERDTree
-  NERDTreeClose
+  NERDTreeTabsClose
 endfunction
 
 function! s:goyo_leave()
@@ -534,6 +523,10 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+" Vimux
+"""""""""""""""""""""""""""""""
+map <leader>x :VimuxPromptCommand<CR>
 
 " }}}
 

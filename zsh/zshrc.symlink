@@ -80,10 +80,9 @@ if [ -z ${RELOAD} ]; then
     fi
 fi
 
-# npx command shell fallback
-if command_exists npx; then
-    source <(npx --shell-auto-fallback zsh)
-fi
+# Base16 shell setup
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # Better history
 # Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
