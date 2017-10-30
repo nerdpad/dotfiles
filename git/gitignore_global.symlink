@@ -8,6 +8,8 @@ Icon
 .idea
 coverage_old
 .tern-port
+.tern-project
+tags
 
 # Thumbnails
 ._*

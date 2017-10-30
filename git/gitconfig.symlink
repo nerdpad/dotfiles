@@ -1,6 +1,6 @@
 # gitconfig
 [user]
-	name = Zuhaib
+	name = Zuhaib Zakaria
 	email = zzakaria@vmware.com
 [github]
 	user = nerdpad
@@ -73,7 +73,7 @@
     assumed = "!git ls-files -v | grep ^h | cut -c 3-"
     unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
 
-    # clean up all 
+    # clean up all
     forget = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
 
     # show the most recently touched branches

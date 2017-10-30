@@ -33,6 +33,7 @@ formulas=(
     ripgrep
     git-standup
     entr
+    ctags
 )
 
 for formula in "${formulas[@]}"; do

@@ -56,6 +56,7 @@ tm_battery="#(~/.dotfiles/bin/battery_indicator.sh)"
 tm_date="#[fg=$tm_color_inactive] %l:%M %p | %d %b"
 tm_host="#[fg=$tm_color_feature,bold]#h"
 tm_session_name="#[fg=$tm_color_feature,bold]#S"
+tm_continuum_status="Continuum: #{continuum_status}"
 
 set -g status-left $tm_session_name' '$tm_separator_dim_right_thin' '
-set -g status-right $tm_tunes' '$tm_date' '$tm_separator_dim_left_thin' '$tm_host
+set -g status-right $tm_tunes' '$tm_date' '$tm_separator_dim_left_thin' '$tm_continuum_status' '$tm_separator_dim_left_thin' '$tm_host

@@ -1,0 +1,14 @@
+--recurse=yes
+--exclude=.git
+--exclude=.idea
+--exclude=.vscode
+--exclude=vendor/*
+--exclude=node_modules/*
+--exclude=db/*
+--exclude=log/*
+--exclude=logs/*
+--exclude=test/*
+--exclude=tests/*
+--exclude=public/*
+--exclude=coverage/*
+--exclude=docs/*

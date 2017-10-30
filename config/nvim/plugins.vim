@@ -32,6 +32,8 @@ Plug 'tpope/vim-commentary' " comment stuff out
 Plug 'tpope/vim-unimpaired' " mappings which are simply short normal mode aliases for commonly used ex commands
 Plug 'tpope/vim-ragtag' " endings for html, xml, etc. - ehances surround
 Plug 'tpope/vim-surround' " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
+Plug 'tpope/vim-obsession' " Update VIM Session file
+" Plug 'dhruvasagar/vim-prosession'
 Plug 'benmills/vimux' " tmux integration for vim
 Plug 'vim-airline/vim-airline' " fancy statusline
 Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
@@ -57,6 +59,7 @@ Plug 'airblade/vim-gitgutter' " Show git changes in gutter
 Plug 'junegunn/limelight.vim' " Hyperfocus-writing in Vim
 Plug 'junegunn/goyo.vim' " Distraction-free writing in Vim
 Plug 'mhinz/vim-startify' " The fancy start screen for Vim
+Plug 'craigemery/vim-autotag'
 
 " completion
 Plug 'SirVer/ultisnips'

@@ -313,6 +313,16 @@ augroup configgroup
     autocmd FileType jsx vnoremap <buffer> <leader>rf :call RangeJsxBeautify()<cr>
     autocmd FileType html vnoremap <buffer> <leader>rf :call RangeHtmlBeautify()<cr>
     autocmd FileType css vnoremap <buffer> <leader>rf :call RangeCSSBeautify()<cr>
+
+    " " Obsession
+    " autocmd VimEnter * nested
+    "   \ if !argc() && empty(v:this_session) && !modified|
+    "   \   if filereadable('Session.vim') |
+    "   \     source Session.vim |
+    "   \   elseif |
+    "   \     Obsession |
+    "   \   endif |
+    "   \ endif
 augroup END
 
 " }}}
@@ -346,6 +356,7 @@ endif
 nmap <silent> <leader>w :Window<cr>
 nmap <silent> <leader>r :Buffers<cr>
 nmap <silent> <leader>e :FZF<cr>
+nmap <silent> <C-space> :BTags<cr>
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
@@ -436,6 +447,7 @@ let g:vim_json_syntax_conceal = 0
 " Tern Add extra filetypes
 let g:tern#filetypes = [
                 \ 'jsx',
+                \ 'javascript',
                 \ 'javascript.jsx',
                 \ 'vue'
                 \ ]
@@ -449,7 +461,7 @@ map <Leader>dp :TernDefPreview<CR>
 let g:ycm_auto_trigger = 1
 let g:ycm_always_populate_location_list = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-map <Leader>e :YcmDiags<CR> 
+" map <Leader>e :YcmDiags<CR> 
 let g:ycm_error_symbol = '✖'
 let g:ycm_warning_symbol = '⚠'
 function! s:CustomizeYcmLocationWindow()
