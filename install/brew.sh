@@ -34,6 +34,8 @@ formulas=(
     git-standup
     entr
     ctags
+    peco
+    tig
 )
 
 for formula in "${formulas[@]}"; do

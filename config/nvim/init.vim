@@ -461,6 +461,7 @@ map <Leader>dp :TernDefPreview<CR>
 let g:ycm_auto_trigger = 1
 let g:ycm_always_populate_location_list = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
 " map <Leader>e :YcmDiags<CR> 
 let g:ycm_error_symbol = '✖'
 let g:ycm_warning_symbol = '⚠'
