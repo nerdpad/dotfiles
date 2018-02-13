@@ -33,13 +33,12 @@ formulas=(
     vim
     z
     zsh
-    zplug
     ripgrep
     git-standup
     entr
+    zplug
     ctags
     peco
-    tig
 )
 
 for formula in "${formulas[@]}"; do
