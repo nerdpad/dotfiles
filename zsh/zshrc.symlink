@@ -47,8 +47,6 @@ if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
 fi
 
-[ -z "$TMUX" ] && export TERM=xterm-256color-italic
-
 # install rbenv
 if command_exists rbenv; then
     eval "$(rbenv init -)"
@@ -59,28 +57,45 @@ if [[ -d ~/.rvm ]]; then
     source ~/.rvm/scripts/rvm
 fi
 
+[ -z "$TMUX" ] && export TERM=xterm-256color-italic
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# zplug config
-export ZPLUG_LOADFILE=$DOTFILES/zsh/zplug.sh
-
-# only source zplug on initial load
-if [ -z ${RELOAD} ]; then
-    if ! [ type "zplug" > /dev/null 2>&1 ]; then
-        source ~/.zplug/init.zsh
-    fi
-fi
-
-# alias git to hub
-if command_exists hub; then
-    eval "$(hub alias -s)"
-fi
-
 # Base16 shell setup
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+if command_exists direnv; then
+    eval "$(direnv hook zsh)"
+fi
+
+if [ -z ${RELOAD}  ]; then
+    export ZPLUG_HOME=/usr/local/opt/zplug
+    source $ZPLUG_HOME/init.zsh
+    zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+    zplug 'zsh-users/zsh-syntax-highlighting', defer:2
+    zplug 'zsh-users/zsh-autosuggestions'
+    zplug 'plugins/ssh-agent', from:oh-my-zsh, ignore:oh-my-zsh.sh
+    zplug 'djui/alias-tips'
+
+    export NVM_AUTO_USE=true
+    zplug 'lukechilds/zsh-nvm'
+
+    # git
+    zplug 'lib/git', from:oh-my-zsh
+    zplug 'plugins/git', from:oh-my-zsh
+
+    if ! zplug check; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        fi
+    fi
+
+    zplug load
+fi
 
 # Better history
 # Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
@@ -95,4 +110,8 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 bindkey "^K" up-line-or-beginning-search # Up
 bindkey "^J" down-line-or-beginning-search # Down
 
-eval $(/usr/libexec/path_helper -d)
+# alias git to hub
+if command_exists hub; then
+    eval "$(hub alias -s)"
+fi
+
