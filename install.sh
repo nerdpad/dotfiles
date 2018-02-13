@@ -33,11 +33,6 @@ elif ! [[ $SHELL =~ .*zsh.* ]]; then
     chsh -s $(which zsh)
 fi
 
-if ! command_exists zplug; then
-    echo "installing zplug, a plugin manager for zsh - http://zplug.sh"
-    git clone https://github.com/zplug/zplug ~/.zplug
-fi
-
 echo "installing TPM, a plugin manager for TMUX - https://github.com/tmux-plugins/tpm"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 

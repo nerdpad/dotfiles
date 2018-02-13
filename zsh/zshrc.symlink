@@ -52,11 +52,6 @@ if command_exists rbenv; then
     eval "$(rbenv init -)"
 fi
 
-if [[ -d ~/.rvm ]]; then
-    PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
-    source ~/.rvm/scripts/rvm
-fi
-
 [ -z "$TMUX" ] && export TERM=xterm-256color-italic
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -69,6 +64,11 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 if command_exists direnv; then
     eval "$(direnv hook zsh)"
+fi
+
+if [[ -d ~/.rvm ]]; then
+    PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
+    source ~/.rvm/scripts/rvm
 fi
 
 if [ -z ${RELOAD}  ]; then
@@ -115,3 +115,4 @@ if command_exists hub; then
     eval "$(hub alias -s)"
 fi
 
+eval $(/usr/libexec/path_helper -s)

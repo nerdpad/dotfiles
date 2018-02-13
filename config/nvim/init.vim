@@ -62,6 +62,7 @@ call plug#begin('~/.config/nvim/plugged')
 	set showbreak=… " show ellipsis at breaking
 	set autoindent " automatically set indent of new line
 	set smartindent
+
 	" set breakindent
 	set ttyfast " faster redrawing
 	set diffopt+=vertical
@@ -111,8 +112,7 @@ call plug#begin('~/.config/nvim/plugged')
 	endif
 
 	" enable 24 bit color support if supported
-	" TODO: remove empty($TMUX) if there are issues in color between normal vim and vim in tmux
-	if (has('mac') && empty($TMUX) && has("termguicolors"))
+	if (has('mac') && has("termguicolors"))
 		set termguicolors
 	endif
 
@@ -242,8 +242,8 @@ call plug#begin('~/.config/nvim/plugged')
 	let g:silent_custom_command = 0
 
 	" helpers for dealing with other people's code
-	nmap \t :set ts=2 sts=2 sw=2 noet<cr>
-	nmap \s :set ts=2 sts=2 sw=2 et<cr>
+	nmap \t :set ts=4 sts=4 sw=4 noet<cr>
+	nmap \s :set ts=2 sts=2 sw=2 et<cr>>
 
 	nnoremap <silent> <leader>u :call functions#HtmlUnEscape()<cr>
 
@@ -268,64 +268,63 @@ call plug#begin('~/.config/nvim/plugged')
 		autocmd FileType qf wincmd J
 		autocmd FileType qf nmap <buffer> q :q<cr>
 
-		" TODO: FIX THIS
-
-        " JsBeautify Shortcuts
-        """""""""""""""""""""""""""""""""""""
-        " autoformat code
-        " format entire file
-        autocmd FileType javascript noremap <buffer> <leader>f :call JsBeautify()<cr>
-        autocmd FileType json noremap <buffer> <leader>f :call JsonBeautify()<cr>
-        autocmd FileType jsx noremap <buffer> <leader>f :call JsxBeautify()<cr>
-        autocmd FileType html noremap <buffer> <leader>f :call HtmlBeautify()<cr>
-        autocmd FileType css noremap <buffer> <leader>f :call CSSBeautify()<cr>
-        " format selection
-        autocmd FileType javascript vnoremap <buffer> <leader>rf :call RangeJsBeautify()<cr>
-        autocmd FileType json vnoremap <buffer> <leader>rf :call RangeJsonBeautify()<cr>
-        autocmd FileType jsx vnoremap <buffer> <leader>rf :call RangeJsxBeautify()<cr>
-        autocmd FileType html vnoremap <buffer> <leader>rf :call RangeHtmlBeautify()<cr>
-        autocmd FileType css vnoremap <buffer> <leader>rf :call RangeCSSBeautify()<cr>
+		" TODO: Move it to it's own Auto CMD section
+		" JsBeautify Shortcuts
+		"""""""""""""""""""""""""""""""""""""
+		" autoformat code
+		" format entire file
+		" autocmd FileType javascript noremap <buffer> <leader>f :call JsBeautify()<cr>
+		" autocmd FileType json noremap <buffer> <leader>f :call JsonBeautify()<cr>
+		" autocmd FileType jsx noremap <buffer> <leader>f :call JsxBeautify()<cr>
+		" autocmd FileType html noremap <buffer> <leader>f :call HtmlBeautify()<cr>
+		" autocmd FileType css noremap <buffer> <leader>f :call CSSBeautify()<cr>
+		" " format selection
+		" autocmd FileType javascript vnoremap <buffer> <leader>rf :call RangeJsBeautify()<cr>
+		" autocmd FileType json vnoremap <buffer> <leader>rf :call RangeJsonBeautify()<cr>
+		" autocmd FileType jsx vnoremap <buffer> <leader>rf :call RangeJsxBeautify()<cr>
+		" autocmd FileType html vnoremap <buffer> <leader>rf :call RangeHtmlBeautify()<cr>
+		" autocmd FileType css vnoremap <buffer> <leader>rf :call RangeCSSBeautify()<cr>
 	augroup END
 " }}}
 
 " General Functionality {{{
-    " a fancy start screen for Vim
-    Plug 'mhinz/vim-startify'
+	" a fancy start screen for Vim
+	Plug 'mhinz/vim-startify'
 
 	" substitute, search, and abbreviate multiple variants of a word
 	Plug 'tpope/vim-abolish'
 
-    " searching in vim {{{
-        " search inside files using ack. Same as command line ack utility, but use :Ack
-        Plug 'mileszs/ack.vim'
-        " alias and shortcut
-        cnoreabbrev Ack Ack!
-        nnoremap <leader>s :Ack!<space><c-r>=expand("<cword>")<cr>
+	" searching in vim {{{
+		" search inside files using ack. Same as command line ack utility, but use :Ack
+		Plug 'mileszs/ack.vim'
+		" alias and shortcut
+		cnoreabbrev Ack Ack!
+		nnoremap <leader>s :Ack!<space><c-r>=expand("<cword>")<cr>
 
-        " use silver searcher (ag) if available
-        if executable('ag')
-          let g:ackprg = 'ag --vimgrep'
-        endif
-    " }}}
+		" use silver searcher (ag) if available
+		if executable('ag')
+			let g:ackprg = 'ag --vimgrep'
+		endif
+	" }}}
 
-    " better alignment {{{
-        Plug 'junegunn/vim-easy-align'
+	" better alignment {{{
+		Plug 'junegunn/vim-easy-align'
 
-        nmap ga <Plug>(EasyAlign)
-        xmap ga <Plug>(EasyAlign)
-        " align assignments
-        nmap <silent> <Leader>a mz<Plug>(EasyAlign)ip=`z
-        " align object properties
-        " nmap <silent> <Leader>a: mz<Plug>(EasyAlign)ip:`z
-    " }}}
+		nmap ga <Plug>(EasyAlign)
+		xmap ga <Plug>(EasyAlign)
+		" align assignments
+		nmap <silent> <Leader>a mz<Plug>(EasyAlign)ip=`z
+		" align object properties
+		" nmap <silent> <Leader>a: mz<Plug>(EasyAlign)ip:`z
+	" }}}
 
 	" insert or delete brackets, parens, quotes in pair
 	Plug 'jiangmiao/auto-pairs'
 	" TODO: FIX Required?
-    " delimitMate
-    """""""""""""""""""""""""""""""""""
-    " let delimitMate_expand_cr=1                 " enable expansion of <CR>
-    " let delimitMate_expand_space=1              " enable expansion of <Space>
+	" delimitMate
+	"""""""""""""""""""""""""""""""""""
+	" let delimitMate_expand_cr=1                 " enable expansion of <CR>
+	" let delimitMate_expand_space=1              " enable expansion of <Space>
 
 	" easy commenting motions
 	Plug 'tpope/vim-commentary'
@@ -363,11 +362,11 @@ call plug#begin('~/.config/nvim/plugged')
 	" detect indent style (tabs vs. spaces)
 	Plug 'tpope/vim-sleuth'
 
-    " Close buffers but keep splits
-    Plug 'moll/vim-bbye'
+	" Close buffers but keep splits
+	Plug 'moll/vim-bbye'
 	nmap <leader>b :Bdelete<cr>
 
-    " Writing in vim {{{{
+	" Writing in vim {{{{
 		Plug 'junegunn/limelight.vim'
 		Plug 'junegunn/goyo.vim'
 		let g:limelight_conceal_ctermfg = 240
@@ -390,10 +389,11 @@ call plug#begin('~/.config/nvim/plugged')
 				:NERDTreeToggle
 			endif
 		endfunction
-        " toggle nerd tree
+
+		" toggle nerd tree
 		nmap <silent> <leader>k :call ToggleNerdTree()<cr>
-        " find the current file in nerdtree without needing to reload the drawer
-        nmap <silent> <leader>y :NERDTreeFind<cr>
+		" find the current file in nerdtree without needing to reload the drawer
+		nmap <silent> <leader>y :NERDTreeFind<cr>
 
 		let NERDTreeShowHidden=1
 		" let NERDTreeDirArrowExpandable = '▷'
@@ -441,8 +441,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 		nnoremap <silent> <Leader>C :call fzf#run({
 		\	'source':
-		\	  map(split(globpath(&rtp, "colors/*.vim"), "\n"),
-		\		  "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
+		\		map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+		\			"substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
 		\	'sink':    'colo',
 		\	'options': '+m',
 		\	'left':    30
@@ -450,9 +450,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 		command! FZFMru call fzf#run({
 		\  'source':  v:oldfiles,
-		\  'sink':	  'e',
+		\  'sink':		'e',
 		\  'options': '-m -x +s',
-		\  'down':	  '40%'})
+		\  'down':		'40%'})
 
 		command! -bang -nargs=* Find call fzf#vim#grep(
 			\ 'rg --column --line-number --no-heading --follow --color=always '.<q-args>, 1,
@@ -464,14 +464,14 @@ call plug#begin('~/.config/nvim/plugged')
 	" }}}
 
 	" signify {{{
-	    " Plug 'airblade/vim-gitgutter'
-	    Plug 'mhinz/vim-signify'
-	    let g:signify_vcs_list = [ 'git' ]
-	    let g:signify_sign_add               = '+'
-	    let g:signify_sign_delete            = '_'
-	    let g:signify_sign_delete_first_line = '‾'
-	    let g:signify_sign_change = '!'
-        let g:gitgutter_realtime = 1
+		Plug 'airblade/vim-gitgutter'
+		" Plug 'mhinz/vim-signify'
+		" let g:signify_vcs_list = [ 'git' ]
+		" let g:signify_sign_add               = '+'
+		" let g:signify_sign_delete            = '_'
+		" let g:signify_sign_delete_first_line = '‾'
+		" let g:signify_sign_change = '!'
+		let g:gitgutter_realtime = 1
 	" }}}
 
 	" vim-fugitive {{{
@@ -514,43 +514,43 @@ call plug#begin('~/.config/nvim/plugged')
 	" }}}
 
 	" Completion {{{
-        " automatically discover and "properly" update ctags files on save
-        Plug 'craigemery/vim-autotag'
+		" automatically discover and properly update ctags files on save
+		Plug 'craigemery/vim-autotag'
 
-	    " TernJS {{{
-            Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
+		" TernJS {{{
+			Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
 
-            " add extra filetypes
-            let g:tern#filetypes = [
-                            \ 'jsx',
-                            \ 'javascript',
-                            \ 'javascript.jsx',
-                            \ 'vue'
-                            \ ]
-            let g:tern#command = ['tern']
-            let g:tern#arguments = ['--persistent', '--no-port-file']
-            map <Leader>dt :TernDefTab<CR>
-            map <Leader>dp :TernDefPreview<CR>
-	    " }}}
+			" add extra filetypes
+			let g:tern#filetypes = [
+									\ 'jsx',
+									\ 'javascript',
+									\ 'javascript.jsx',
+									\ 'vue'
+									\ ]
+			let g:tern#command = ['tern']
+			let g:tern#arguments = ['--persistent', '--no-port-file']
+			map <Leader>dt :TernDefTab<CR>
+			map <Leader>dp :TernDefPreview<CR>
+		" }}}
 
-        " YouCompleteMe {{{
-            " a code-completion engine for Vim
-            Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --clang-completer --tern-completer' }
+		" YouCompleteMe {{{
+			" a code-completion engine for Vim
+			Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --clang-completer --tern-completer' }
 
-            let g:ycm_auto_trigger = 1
-            let g:ycm_always_populate_location_list = 1
-            let g:ycm_autoclose_preview_window_after_insertion = 1
-            let g:ycm_collect_identifiers_from_tags_files = 1
-            " map <Leader>e :YcmDiags<CR>
-            let g:ycm_error_symbol = '✖'
-            let g:ycm_warning_symbol = '⚠'
-            function! s:CustomizeYcmLocationWindow()
-              10wincmd _
-            endfunction
-            autocmd User YcmLocationOpened call s:CustomizeYcmLocationWindow()
-            let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
-            let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-        " }}}
+			let g:ycm_auto_trigger = 1
+			let g:ycm_always_populate_location_list = 1
+			let g:ycm_autoclose_preview_window_after_insertion = 1
+			let g:ycm_collect_identifiers_from_tags_files = 1
+			" map <Leader>e :YcmDiags<CR>
+			let g:ycm_error_symbol = '✖'
+			let g:ycm_warning_symbol = '⚠'
+			function! s:CustomizeYcmLocationWindow()
+				10wincmd _
+			endfunction
+			autocmd User YcmLocationOpened call s:CustomizeYcmLocationWindow()
+			let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+			let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+		" }}}
 	" }}}
 " }}}
 
@@ -560,7 +560,7 @@ call plug#begin('~/.config/nvim/plugged')
 		Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx', 'eruby' ]}
 		let g:user_emmet_settings = {
 		\  'javascript.jsx': {
-		\	   'extends': 'jsx',
+		\		 'extends': 'jsx',
 		\  },
 		\}
 
@@ -584,12 +584,26 @@ call plug#begin('~/.config/nvim/plugged')
 		Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'html'] }
 		Plug 'moll/vim-node', { 'for': 'javascript' }
 		Plug 'mxw/vim-jsx', { 'for': ['javascript.jsx', 'javascript'] }
-        Plug 'maksimr/vim-jsbeautify', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'html', 'css', 'json'], 'do': 'git submodule update --init --recursive' }
 
 		" Beautify
 		let g:editorconfig_Beautifier = '~/.editorconfig'
 
 		" code formatting {{{
+			Plug 'maksimr/vim-jsbeautify', { 'for': ['javascript', 'javascript.jsx', 'jsx', 'html', 'css', 'json'], 'do': 'git submodule update --init --recursive' }
+
+			augroup code_formatting
+				autocmd FileType javascript noremap <buffer> <leader>f :call JsBeautify()<cr>
+				autocmd FileType json noremap <buffer> <leader>f :call JsonBeautify()<cr>
+				autocmd FileType jsx noremap <buffer> <leader>f :call JsxBeautify()<cr>
+				autocmd FileType html noremap <buffer> <leader>f :call HtmlBeautify()<cr>
+				autocmd FileType css noremap <buffer> <leader>f :call CSSBeautify()<cr>
+				" format selection
+				autocmd FileType javascript vnoremap <buffer> <leader>rf :call RangeJsBeautify()<cr>
+				autocmd FileType json vnoremap <buffer> <leader>rf :call RangeJsonBeautify()<cr>
+				autocmd FileType jsx vnoremap <buffer> <leader>rf :call RangeJsxBeautify()<cr>
+				autocmd FileType html vnoremap <buffer> <leader>rf :call RangeHtmlBeautify()<cr>
+				autocmd FileType css vnoremap <buffer> <leader>rf :call RangeCSSBeautify()<cr>
+			augroup END
 		" }}}
 	" }}}
 

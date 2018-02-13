@@ -33,6 +33,7 @@ formulas=(
     vim
     z
     zsh
+    zplug
     ripgrep
     git-standup
     entr
