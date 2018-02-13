@@ -4,8 +4,6 @@
 	email = zzakaria@vmware.com
 [github]
 	user = nerdpad
-[init]
-    templatedir = ~/.dotfiles/git/templates
 [alias]
     # list all aliases
     la = "!git config -l | grep alias | cut -c 7-"

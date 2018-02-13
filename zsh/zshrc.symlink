@@ -5,7 +5,6 @@ command_exists() {
     type "$1" > /dev/null 2>&1
 }
 
-
 # display how long all tasks over 10 seconds take
 export REPORTTIME=10
 
@@ -23,7 +22,6 @@ for config ($ZSH/**/*.zsh) source $config
 if [[ -a ~/.localrc ]]; then
     source ~/.localrc
 fi
-
 
 # initialize autocomplete
 autoload -U compinit add-zsh-hook
@@ -61,11 +59,6 @@ if [[ -d ~/.rvm ]]; then
     source ~/.rvm/scripts/rvm
 fi
 
-# alias git to hub
-if command_exists hub; then
-    eval "$(hub alias -s)"
-fi
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -78,6 +71,11 @@ if [ -z ${RELOAD} ]; then
     if ! [ type "zplug" > /dev/null 2>&1 ]; then
         source ~/.zplug/init.zsh
     fi
+fi
+
+# alias git to hub
+if command_exists hub; then
+    eval "$(hub alias -s)"
 fi
 
 # Base16 shell setup
@@ -93,4 +91,8 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
-# eval $(/usr/libexec/path_helper -d)
+# autosuggestions
+bindkey "^K" up-line-or-beginning-search # Up
+bindkey "^J" down-line-or-beginning-search # Down
+
+eval $(/usr/libexec/path_helper -d)

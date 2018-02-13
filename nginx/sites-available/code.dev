@@ -3,7 +3,7 @@ server {
     server_name app localhost .dev;
 
     # the location of our projects directory
-    set $basepath "/Users/nicknisi/code";
+    set $basepath "/Users/zzakaria/code";
 
     set $domain $host;
     if ($domain ~ "^(.*)\.dev$") {
