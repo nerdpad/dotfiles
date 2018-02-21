@@ -651,6 +651,9 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 	Plug 'tpope/vim-endwise', { 'for': [ 'ruby', 'bash', 'zsh', 'sh' ]}
 	Plug 'kchmck/vim-coffee-script', { 'for': 'coffeescript' }
+
+	" NGINX, ERB, LUA syntax
+	Plug 'chr4/nginx.vim'
 " }}}
 
 call plug#end()
