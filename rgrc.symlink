@@ -1,0 +1,20 @@
+## Type additions
+
+# add new types to search by
+--type-add
+style:*.{css,sass,less,stylus}
+
+--type-add
+pug:*.{pug,jade}
+
+--type-add
+tmpl:*.{html,hbs,pug}
+
+# Don't let ripgrep vomit really long lines to my terminal
+--max-columns=150
+
+# ignore case
+--smart-case
+
+# follow symlinks
+--follow
