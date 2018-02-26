@@ -295,10 +295,8 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'tpope/vim-abolish'
 
 	" searching in vim {{{
-        " search inside files using ripgrep. This plugin provides an Ack command.
-        Plug 'wincent/ferret'
-		" search inside files using ack. Same as command line ack utility, but use :Ack
-		Plug 'mileszs/ack.vim'
+		" search inside files using ripgrep. This plugin provides an Ack command.
+		Plug 'wincent/ferret'
 		" alias and shortcut
 		cnoreabbrev Ack Ack!
 		nnoremap <leader>s :Ack!<space><c-r>=expand("<cword>")<cr>
