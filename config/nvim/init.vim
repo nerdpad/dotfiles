@@ -24,7 +24,7 @@ call plug#begin('~/.config/nvim/plugged')
 	set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 	if (has('nvim'))
-		let g:python_host_prog = '/usr/local/bin/python2'
+		let g:python_host_prog = '/usr/local/bin/python'
 		let g:python3_host_prog = '/usr/local/bin/python3'
 		" show results of substition as they're happening
 		" but don't open a split
