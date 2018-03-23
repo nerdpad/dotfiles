@@ -553,6 +553,9 @@ call plug#begin('~/.config/nvim/plugged')
 			let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 		" }}}
 	" }}}
+
+	" Easy Motion
+	Plug 'justinmk/vim-sneak'
 " }}}
 
 " Language-Specific Configuration {{{
