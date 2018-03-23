@@ -14,6 +14,9 @@ alias sudo="sudo "
 # vimrc editing
 alias ve='vim ~/.vimrc'
 
+# update vim plugins
+alias vup="vim +PlugClean +PlugInstall +PlugUpdate +PlugUpgrade +qa!"
+
 # zsh profile editing
 alias ze='vim ~/.zshrc'
 

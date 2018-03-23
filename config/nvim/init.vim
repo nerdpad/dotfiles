@@ -265,23 +265,6 @@ call plug#begin('~/.config/nvim/plugged')
 		" when there are multiple windows open
 		autocmd FileType qf wincmd J
 		autocmd FileType qf nmap <buffer> q :q<cr>
-
-		" TODO: Move it to it's own Auto CMD section
-		" JsBeautify Shortcuts
-		"""""""""""""""""""""""""""""""""""""
-		" autoformat code
-		" format entire file
-		" autocmd FileType javascript noremap <buffer> <leader>f :call JsBeautify()<cr>
-		" autocmd FileType json noremap <buffer> <leader>f :call JsonBeautify()<cr>
-		" autocmd FileType jsx noremap <buffer> <leader>f :call JsxBeautify()<cr>
-		" autocmd FileType html noremap <buffer> <leader>f :call HtmlBeautify()<cr>
-		" autocmd FileType css noremap <buffer> <leader>f :call CSSBeautify()<cr>
-		" " format selection
-		" autocmd FileType javascript vnoremap <buffer> <leader>rf :call RangeJsBeautify()<cr>
-		" autocmd FileType json vnoremap <buffer> <leader>rf :call RangeJsonBeautify()<cr>
-		" autocmd FileType jsx vnoremap <buffer> <leader>rf :call RangeJsxBeautify()<cr>
-		" autocmd FileType html vnoremap <buffer> <leader>rf :call RangeHtmlBeautify()<cr>
-		" autocmd FileType css vnoremap <buffer> <leader>rf :call RangeCSSBeautify()<cr>
 	augroup END
 " }}}
 
