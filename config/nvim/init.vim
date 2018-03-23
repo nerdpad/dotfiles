@@ -24,8 +24,6 @@ call plug#begin('~/.config/nvim/plugged')
 	set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 	if (has('nvim'))
-		let g:python_host_prog = '/usr/local/bin/python'
-		let g:python3_host_prog = '/usr/local/bin/python3'
 		" show results of substition as they're happening
 		" but don't open a split
 		set inccommand=nosplit
@@ -363,6 +361,9 @@ call plug#begin('~/.config/nvim/plugged')
 	" detect indent style (tabs vs. spaces)
 	Plug 'tpope/vim-sleuth'
 
+	" Open selection in carbon.now.sh
+	Plug 'kristijanhusak/vim-carbon-now-sh'
+
 	" Close buffers but keep splits
 	Plug 'moll/vim-bbye'
 	nmap <leader>b :Bdelete<cr>
@@ -390,7 +391,6 @@ call plug#begin('~/.config/nvim/plugged')
 				:NERDTreeToggle
 			endif
 		endfunction
-
 		" toggle nerd tree
 		nmap <silent> <leader>k :call ToggleNerdTree()<cr>
 		" find the current file in nerdtree without needing to reload the drawer
@@ -401,13 +401,13 @@ call plug#begin('~/.config/nvim/plugged')
 		" let NERDTreeDirArrowCollapsible = '▼'
 		let g:NERDTreeIndicatorMapCustom = {
 		\ "Modified"  : "✹",
-		\ "Staged"    : "✚",
+		\ "Staged"	  : "✚",
 		\ "Untracked" : "✭",
 		\ "Renamed"   : "➜",
 		\ "Unmerged"  : "═",
 		\ "Deleted"   : "✖",
-		\ "Dirty"     : "✗",
-		\ "Clean"     : "✔︎",
+		\ "Dirty"	  : "✗",
+		\ "Clean"	  : "✔︎",
 		\ 'Ignored'   : '☒',
 		\ "Unknown"   : "?"
 		\ }
@@ -459,17 +459,17 @@ call plug#begin('~/.config/nvim/plugged')
 			\ 'rg --column --line-number --no-heading --follow --color=always '.<q-args>, 1,
 			\ <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
 		command! -bang -nargs=? -complete=dir Files
-			\ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+			\ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
 		command! -bang -nargs=? -complete=dir GFiles
-			\ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
+			\ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
 	" }}}
 
 	" signify {{{
 		Plug 'airblade/vim-gitgutter'
 		" Plug 'mhinz/vim-signify'
 		" let g:signify_vcs_list = [ 'git' ]
-		" let g:signify_sign_add               = '+'
-		" let g:signify_sign_delete            = '_'
+		" let g:signify_sign_add				 = '+'
+		" let g:signify_sign_delete			 = '_'
 		" let g:signify_sign_delete_first_line = '‾'
 		" let g:signify_sign_change = '!'
 		let g:gitgutter_realtime = 1
@@ -506,6 +506,10 @@ call plug#begin('~/.config/nvim/plugged')
 		\	'typescript': ['tsserver', 'tslint'],
 		\	'html': []
 		\}
+		let g:ale_fixers = {}
+		let g:ale_fixers['javascript'] = ['prettier']
+		let g:ale_javascript_prettier_use_local_config = 1
+		let g:ale_fix_on_save = 0
 	" }}}
 
 	" UltiSnips {{{
