@@ -241,7 +241,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 	" helpers for dealing with other people's code
 	nmap \t :set ts=4 sts=4 sw=4 noet<cr>
-	nmap \s :set ts=2 sts=2 sw=2 et<cr>>
+	nmap \s :set ts=2 sts=2 sw=2 et<cr>
 
 	nnoremap <silent> <leader>u :call functions#HtmlUnEscape()<cr>
 
