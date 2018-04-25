@@ -55,7 +55,11 @@ fi
 # add a config file for ripgrep
 export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
 
-[ -z "$TMUX" ] && export TERM=xterm-256color-italic
+if [ -z "$TMUX" ]; then
+    export TERM=xterm-256color-italic
+else
+    export TERM=tmux-256color-italic
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
@@ -83,7 +87,8 @@ if [ -z ${RELOAD}  ]; then
     zplug 'plugins/ssh-agent', from:oh-my-zsh, ignore:oh-my-zsh.sh
     zplug 'djui/alias-tips'
 
-    export NVM_AUTO_USE=true
+    export NVM_AUTO_USE=false
+    export NVM_NO_USE=true
     zplug 'lukechilds/zsh-nvm'
 
     # git
