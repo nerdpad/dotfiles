@@ -1,4 +1,7 @@
 {
+	"env": {
+		"node": true
+	},
 	"parserOptions": {
 		"ecmaVersion": 6,
 		"sourceType": "module",
@@ -12,8 +15,5 @@
 		"no-unused-vars": 2,
 		"no-use-before-define": 2,
 		"no-undef": 2
-	},
-	"env": [
-		"node"
-	]
+	}
 }
