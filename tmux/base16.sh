@@ -18,7 +18,8 @@
 base00=default  # #000000
 base01=colour18 # #282828
 base02=colour19 # #383838
-base03=colour8  # #585858
+# base03=colour8  # #585858
+base03=colour241
 base04=colour20 # #B8B8B8
 base05=colour7  # #D8D8D8
 base06=colour21 # #E8E8E8
@@ -27,7 +28,8 @@ base08=colour01 # #AB4642
 base09=colour16 # #DC9656
 base0A=colour3  # #F7CA88
 base0B=colour2  # #A1B56C
-base0C=colour6  # #86C1B9
+# base0C=colour6  # #86C1B9
+base0C=colour198  # #86C1B9
 base0D=colour4  # #7CAFC2
 base0E=colour5  # #BA8BAF
 base0F=colour17 # #A16946
@@ -43,7 +45,7 @@ set-option -g status-attr default
 
 set-window-option -g window-status-fg $base04
 set-window-option -g window-status-bg $base00
-set -g window-status-format " #I #W"
+set -g window-status-format " #I. #W"
 
 # active window title colors
 set-window-option -g window-status-current-fg $base01
