@@ -122,23 +122,114 @@ call plug#begin('~/.config/nvim/plugged')
 	" Plug 'joshdick/onedark.vim'
 	Plug 'rakr/vim-one'
 
-	" Airline {{{
-		Plug 'vim-airline/vim-airline'
-		Plug 'vim-airline/vim-airline-themes'
-		let g:airline_powerline_fonts=1
-		let g:airline_left_sep=''
-		let g:airline_right_sep=''
-		let g:airline_theme='one'
-		let g:airline#extensions#tabline#show_splits = 0
-		let g:airline#extensions#whitespace#enabled = 0
-		" enable airline tabline
-		let g:airline#extensions#tabline#enabled = 1
-		" only show tabline if tabs are being used (more than 1 tab open)
-		let g:airline#extensions#tabline#tab_min_count = 2
-		" do not show open buffers in tabline
-		let g:airline#extensions#tabline#show_buffers = 0
-		" Show errors in airline from ALE
-		let g:airline#extensions#ale#enabled = 1
+	" LightLine {{{
+		Plug 'itchyny/lightline.vim'
+		Plug 'nicknisi/vim-base16-lightline'
+		" Plug 'felixjung/vim-base16-lightline'
+		let g:lightline = {
+		\	'colorscheme': 'base16',
+		\	'active': {
+		\		'left': [ [ 'mode', 'paste' ],
+		\				[ 'gitbranch' ],
+		\				[ 'readonly', 'filetype', 'filename' ]],
+		\		'right': [ [ 'percent' ], [ 'lineinfo' ],
+		\				[ 'fileformat', 'fileencoding' ],
+		\				[ 'linter_errors', 'linter_warnings' ]]
+		\	},
+		\	'component_expand': {
+		\		'linter': 'LightlineLinter',
+		\		'linter_warnings': 'LightlineLinterWarnings',
+		\		'linter_errors': 'LightlineLinterErrors',
+		\		'linter_ok': 'LightlineLinterOk'
+		\	},
+		\	'component_type': {
+		\		'readonly': 'error',
+		\		'linter_warnings': 'warning',
+		\		'linter_errors': 'error'
+		\	},
+		\	'component_function': {
+		\		'fileencoding': 'LightlineFileEncoding',
+		\		'filename': 'LightlineFileName',
+		\		'fileformat': 'LightlineFileFormat',
+		\		'filetype': 'LightlineFileType',
+		\		'gitbranch': 'LightlineGitBranch'
+		\	},
+		\	'tabline': {
+		\		'left': [ [ 'tabs' ] ],
+		\		'right': [ [ 'close' ] ]
+		\	},
+		\	'tab': {
+		\		'active': [ 'filename', 'modified' ],
+		\		'inactive': [ 'filename', 'modified' ],
+		\	},
+		\	'separator': { 'left': '', 'right': '' },
+		\	'subseparator': { 'left': '', 'right': '' }
+		\ }
+		" \   'separator': { 'left': '▓▒░', 'right': '░▒▓' },
+		" \   'subseparator': { 'left': '▒', 'right': '░' }
+
+		function! LightlineFileName() abort
+			let filename = winwidth(0) > 70 ? expand('%') : expand('%:t')
+			if filename =~ 'NERD_tree'
+				return ''
+			endif
+			let modified = &modified ? ' +' : ''
+			return fnamemodify(filename, ":~:.") . modified
+		endfunction
+
+		function! LightlineFileEncoding()
+			" only show the file encoding if it's not 'utf-8'
+			return &fileencoding == 'utf-8' ? '' : &fileencoding
+		endfunction
+
+		function! LightlineFileFormat()
+			" only show the file format if it's not 'unix'
+			let format = &fileformat == 'unix' ? '' : &fileformat
+			return winwidth(0) > 70 ? format . ' ' . WebDevIconsGetFileFormatSymbol() : ''
+		endfunction
+
+		function! LightlineFileType()
+			return WebDevIconsGetFileTypeSymbol()
+			" return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+		endfunction
+
+		function! LightlineLinter() abort
+			let l:counts = ale#statusline#Count(bufnr(''))
+			return l:counts.total == 0 ? '' : printf('×%d', l:counts.total)
+		endfunction
+
+		function! LightlineLinterWarnings() abort
+			let l:counts = ale#statusline#Count(bufnr(''))
+			let l:all_errors = l:counts.error + l:counts.style_error
+			let l:all_non_errors = l:counts.total - l:all_errors
+			return l:counts.total == 0 ? '' : '⚠ ' . printf('%d', all_non_errors)
+		endfunction
+
+		function! LightlineLinterErrors() abort
+			let l:counts = ale#statusline#Count(bufnr(''))
+			let l:all_errors = l:counts.error + l:counts.style_error
+			return l:counts.total == 0 ? '' : '✖ ' . printf('%d', all_errors)
+		endfunction
+
+		function! LightlineLinterOk() abort
+			let l:counts = ale#statusline#Count(bufnr(''))
+			return l:counts.total == 0 ? 'OK' : ''
+		endfunction
+
+		function! LightlineGitBranch()
+			return "\uE725" . (exists('*fugitive#head') ? fugitive#head() : '')
+		endfunction
+
+		function! LightlineUpdate()
+			if g:goyo_entered == 0
+				" do not update lightline if in Goyo mode
+				call lightline#update()
+			endif
+		endfunction
+
+		augroup alestatus
+			autocmd User ALELint call LightlineUpdate()
+		augroup end
 	" }}}
 " }}}
 
@@ -219,6 +310,14 @@ call plug#begin('~/.config/nvim/plugged')
 	vnoremap ∆ :m '>+1<cr>gv=gv
 	vnoremap ˚ :m '<-2<cr>gv=gv
 
+	vnoremap $( <esc>`>a)<esc>`<i(<esc>
+	vnoremap $[ <esc>`>a]<esc>`<i[<esc>
+	vnoremap ${ <esc>`>a}<esc>`<i{<esc>
+	vnoremap $" <esc>`>a"<esc>`<i"<esc>
+	vnoremap $' <esc>`>a'<esc>`<i'<esc>
+	vnoremap $\ <esc>`>o*/<esc>`<O/*<esc>
+	vnoremap $< <esc>`>a><esc>`<i<<esc>
+
 	" toggle cursor line
 	nnoremap <leader>i :set cursorline!<cr>
 	set cursorline
@@ -232,12 +331,6 @@ call plug#begin('~/.config/nvim/plugged')
 	nnoremap <silent> k gk
 	nnoremap <silent> ^ g^
 	nnoremap <silent> $ g$
-
-	" inoremap <tab> <c-r>=Smart_TabComplete()<CR>
-
-	map <leader>r :call RunCustomCommand()<cr>
-	" map <leader>s :call SetCustomCommand()<cr>
-	let g:silent_custom_command = 0
 
 	" helpers for dealing with other people's code
 	nmap \t :set ts=4 sts=4 sw=4 noet<cr>
@@ -269,9 +362,6 @@ call plug#begin('~/.config/nvim/plugged')
 " }}}
 
 " General Functionality {{{
-	" a fancy start screen for Vim
-	Plug 'mhinz/vim-startify'
-
 	" substitute, search, and abbreviate multiple variants of a word
 	Plug 'tpope/vim-abolish'
 
@@ -302,6 +392,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 	" insert or delete brackets, parens, quotes in pair
 	Plug 'jiangmiao/auto-pairs'
+
 	" TODO: FIX Required?
 	" delimitMate
 	"""""""""""""""""""""""""""""""""""
@@ -341,8 +432,56 @@ call plug#begin('~/.config/nvim/plugged')
 	" extended % matching
 	Plug 'vim-scripts/matchit.zip'
 
+	" add end, endif, etc. automatically
+	Plug 'tpope/vim-endwise'
+
 	" detect indent style (tabs vs. spaces)
 	Plug 'tpope/vim-sleuth'
+
+	" a simple tool for presenting slides in vim based on text files
+	Plug 'sotte/presenting.vim', { 'for': 'markdown' }
+
+	" Fancy startup screen for vim {{{
+	Plug 'mhinz/vim-startify'
+
+		" Don't change to directory when selecting a file
+		let g:startify_files_number = 5
+		let g:startify_change_to_dir = 0
+		let g:startify_custom_header = [ ]
+		let g:startify_relative_path = 1
+		let g:startify_use_env = 1
+
+		function! s:list_commits()
+			let git = 'git -C ' . getcwd()
+			let commits = systemlist(git . ' log --oneline | head -n5')
+			let git = 'G' . git[1:]
+			return map(commits, '{"line": matchstr(v:val, "\\s\\zs.*"), "cmd": "'. git .' show ". matchstr(v:val, "^\\x\\+") }')
+		endfunction
+
+		" Custom startup list, only show MRU from current directory/project
+		let g:startify_lists = [
+		\  { 'type': 'dir',		  'header': [ 'Files '. getcwd() ] },
+		\  { 'type': function('s:list_commits'), 'header': [ 'Recent Commits' ] },
+		\  { 'type': 'sessions',  'header': [ 'Sessions' ]		 },
+		\  { 'type': 'bookmarks', 'header': [ 'Bookmarks' ]		 },
+		\  { 'type': 'commands',  'header': [ 'Commands' ]		 },
+		\ ]
+
+		let g:startify_commands = [
+		\	{ 'up': [ 'Update Plugins', ':PlugUpdate' ] },
+		\	{ 'ug': [ 'Upgrade Plugin Manager', ':PlugUpgrade' ] },
+		\ ]
+
+		let g:startify_bookmarks = [
+			\ { 'c': '~/code/dotfiles/config/nvim/init.vim' },
+			\ { 'z': '~/code/dotfiles/zsh/zshrc.symlink' }
+		\ ]
+
+		autocmd User Startified setlocal cursorline
+	" }}}
+
+	" Open selection in carbon.now.sh
+	Plug 'kristijanhusak/vim-carbon-now-sh'
 
 	" Open selection in carbon.now.sh
 	Plug 'kristijanhusak/vim-carbon-now-sh'
@@ -355,6 +494,28 @@ call plug#begin('~/.config/nvim/plugged')
 		Plug 'junegunn/limelight.vim'
 		Plug 'junegunn/goyo.vim'
 		let g:limelight_conceal_ctermfg = 240
+
+        let g:goyo_entered = 0
+		function! s:goyo_enter()
+			silent !tmux set status off
+            let g:goyo_entered = 1
+			set noshowmode
+			set noshowcmd
+			set scrolloff=999
+			Limelight
+		endfunction
+
+		function! s:goyo_leave()
+			silent !tmux set status on
+            let g:goyo_entered = 0
+			set showmode
+			set showcmd
+			set scrolloff=5
+			Limelight!
+		endfunction
+
+		autocmd! User GoyoEnter nested call <SID>goyo_enter()
+		autocmd! User GoyoLeave nested call <SID>goyo_leave()
 	" }}}
 
 	" context-aware pasting
@@ -368,7 +529,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 		" Toggle NERDTree
 		function! ToggleNerdTree()
-			if @% != "" && (!exists("g:NERDTree") || (g:NERDTree.ExistsForTab() && !g:NERDTree.IsOpen()))
+			if @% != "" && @% !~ "Startify" && (!exists("g:NERDTree") || (g:NERDTree.ExistsForTab() && !g:NERDTree.IsOpen()))
 				:NERDTreeFind
 			else
 				:NERDTreeToggle
@@ -403,11 +564,13 @@ call plug#begin('~/.config/nvim/plugged')
 
 		if isdirectory(".git")
 			" if in a git project, use :GFiles
-			nmap <silent> <leader>t :GFiles --cached --others --exclude-standard<cr>
+			nmap <silent> <leader>t :GitFiles --cached --others --exclude-standard<cr>
 		else
 			" otherwise, use :FZF
 			nmap <silent> <leader>t :FZF<cr>
 		endif
+
+		nmap <silent> <leader>s :GFiles?<cr>
 
 		nmap <silent> <leader>r :Buffers<cr>
 		nmap <silent> <leader>e :FZF<cr>
@@ -425,8 +588,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 		nnoremap <silent> <Leader>C :call fzf#run({
 		\	'source':
-		\		map(split(globpath(&rtp, "colors/*.vim"), "\n"),
-		\			"substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
+		\	  map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+		\		  "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
 		\	'sink':    'colo',
 		\	'options': '+m',
 		\	'left':    30
@@ -434,16 +597,16 @@ call plug#begin('~/.config/nvim/plugged')
 
 		command! FZFMru call fzf#run({
 		\  'source':  v:oldfiles,
-		\  'sink':		'e',
+		\  'sink':	  'e',
 		\  'options': '-m -x +s',
-		\  'down':		'40%'})
+		\  'down':	  '40%'})
 
 		command! -bang -nargs=* Find call fzf#vim#grep(
 			\ 'rg --column --line-number --no-heading --follow --color=always '.<q-args>, 1,
 			\ <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
 		command! -bang -nargs=? -complete=dir Files
 			\ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
-		command! -bang -nargs=? -complete=dir GFiles
+		command! -bang -nargs=? -complete=dir GitFiles
 			\ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
 	" }}}
 
@@ -474,9 +637,6 @@ call plug#begin('~/.config/nvim/plugged')
 		let g:ale_sign_column_always = 1
 		let g:ale_sign_error = '✖'
 		let g:ale_sign_warning = '⚠'
-		let g:airline#extensions#ale#enabled = 1  " Show linting error in AirLine
-		let g:airline#extensions#ale#enabled = 1  " Show linting error in AirLine
-		let g:airline#extensions#ale#enabled = 1  " Show linting error in AirLine
 		let g:ale_echo_msg_error_str = 'E'
 		let g:ale_echo_msg_warning_str = 'W'
 		let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
@@ -491,6 +651,8 @@ call plug#begin('~/.config/nvim/plugged')
 		\}
 		let g:ale_fixers = {}
 		let g:ale_fixers['javascript'] = ['prettier']
+        let g:ale_fixers['typescript'] = ['prettier', 'tslint']
+		let g:ale_fixers['json'] = ['prettier']
 		let g:ale_javascript_prettier_use_local_config = 1
 		let g:ale_fix_on_save = 0
 	" }}}
@@ -551,7 +713,7 @@ call plug#begin('~/.config/nvim/plugged')
 		Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx', 'eruby' ]}
 		let g:user_emmet_settings = {
 		\  'javascript.jsx': {
-		\		 'extends': 'jsx',
+		\	   'extends': 'jsx',
 		\  },
 		\}
 
@@ -570,6 +732,9 @@ call plug#begin('~/.config/nvim/plugged')
 		" Ruby / Ruby on Rails
 		Plug 'tpope/vim-rails', { 'for': 'ruby' }
 	" }}}
+
+	" Ruby / Ruby on Rails
+	Plug 'tpope/vim-rails', { 'for': 'ruby' }
 
 	" JavaScript {{{
 		Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'html'] }
@@ -601,9 +766,8 @@ call plug#begin('~/.config/nvim/plugged')
 	" TypeScript {{{
 		Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 		Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-		Plug 'Quramy/tsuquyomi', { 'for': 'typescript', 'do': 'npm install' }
 
-		" TypeScript Options
+        Plug 'Quramy/tsuquyomi', { 'for': 'typescript', 'do': 'npm install' }
 		let g:tsuquyomi_completion_detail = 1
 		let g:tsuquyomi_disable_default_mappings = 1
 		let g:tsuquyomi_completion_detail = 1
@@ -627,9 +791,6 @@ call plug#begin('~/.config/nvim/plugged')
 		nmap <leader>m :MarkedOpen!<cr>
 		nmap <leader>mq :MarkedQuit<cr>
 		nmap <leader>* *<c-o>:%s///gn<cr>
-
-		" a simple tool for presenting slides in vim based on text files
-		Plug 'sotte/presenting.vim', { 'for': 'markdown' }
 	" }}}
 
 	" JSON {{{
@@ -640,7 +801,6 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'fatih/vim-go', { 'for': 'go' }
 	Plug 'timcharper/textile.vim', { 'for': 'textile' }
 	Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
-	Plug 'tpope/vim-endwise', { 'for': [ 'ruby', 'bash', 'zsh', 'sh' ]}
 	Plug 'kchmck/vim-coffee-script', { 'for': 'coffeescript' }
 
 	" NGINX, ERB, LUA syntax
