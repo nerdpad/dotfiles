@@ -362,9 +362,6 @@ call plug#begin('~/.config/nvim/plugged')
 " }}}
 
 " General Functionality {{{
-	" a fancy start screen for Vim
-	Plug 'mhinz/vim-startify'
-
 	" substitute, search, and abbreviate multiple variants of a word
 	Plug 'tpope/vim-abolish'
 
@@ -395,6 +392,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 	" insert or delete brackets, parens, quotes in pair
 	Plug 'jiangmiao/auto-pairs'
+
 	" TODO: FIX Required?
 	" delimitMate
 	"""""""""""""""""""""""""""""""""""
@@ -440,8 +438,6 @@ call plug#begin('~/.config/nvim/plugged')
 	" detect indent style (tabs vs. spaces)
 	Plug 'tpope/vim-sleuth'
 
-<<<<<<< HEAD
-=======
 	" a simple tool for presenting slides in vim based on text files
 	Plug 'sotte/presenting.vim', { 'for': 'markdown' }
 
@@ -484,7 +480,9 @@ call plug#begin('~/.config/nvim/plugged')
 		autocmd User Startified setlocal cursorline
 	" }}}
 
->>>>>>> 22e81c23b843a496321bb5edda1f3311ee226755
+	" Open selection in carbon.now.sh
+	Plug 'kristijanhusak/vim-carbon-now-sh'
+
 	" Open selection in carbon.now.sh
 	Plug 'kristijanhusak/vim-carbon-now-sh'
 
@@ -590,8 +588,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 		nnoremap <silent> <Leader>C :call fzf#run({
 		\	'source':
-		\		map(split(globpath(&rtp, "colors/*.vim"), "\n"),
-		\			"substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
+		\	  map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+		\		  "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
 		\	'sink':    'colo',
 		\	'options': '+m',
 		\	'left':    30
@@ -599,9 +597,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 		command! FZFMru call fzf#run({
 		\  'source':  v:oldfiles,
-		\  'sink':		'e',
+		\  'sink':	  'e',
 		\  'options': '-m -x +s',
-		\  'down':		'40%'})
+		\  'down':	  '40%'})
 
 		command! -bang -nargs=* Find call fzf#vim#grep(
 			\ 'rg --column --line-number --no-heading --follow --color=always '.<q-args>, 1,
@@ -639,9 +637,6 @@ call plug#begin('~/.config/nvim/plugged')
 		let g:ale_sign_column_always = 1
 		let g:ale_sign_error = '✖'
 		let g:ale_sign_warning = '⚠'
-		let g:airline#extensions#ale#enabled = 1  " Show linting error in AirLine
-		let g:airline#extensions#ale#enabled = 1  " Show linting error in AirLine
-		let g:airline#extensions#ale#enabled = 1  " Show linting error in AirLine
 		let g:ale_echo_msg_error_str = 'E'
 		let g:ale_echo_msg_warning_str = 'W'
 		let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
@@ -718,7 +713,7 @@ call plug#begin('~/.config/nvim/plugged')
 		Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx', 'eruby' ]}
 		let g:user_emmet_settings = {
 		\  'javascript.jsx': {
-		\		 'extends': 'jsx',
+		\	   'extends': 'jsx',
 		\  },
 		\}
 
