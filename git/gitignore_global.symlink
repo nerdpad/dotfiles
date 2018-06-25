@@ -35,3 +35,4 @@ npm-debug.log
 zz_changes.patch
 package-lock.json
 .byebug-history
+buildinfo.json

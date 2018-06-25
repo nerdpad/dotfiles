@@ -570,7 +570,7 @@ call plug#begin('~/.config/nvim/plugged')
 			nmap <silent> <leader>t :FZF<cr>
 		endif
 
-		nmap <silent> <leader>s :GFiles?<cr>
+		" nmap <silent> <leader>s :GFiles?<cr>
 
 		nmap <silent> <leader>r :Buffers<cr>
 		nmap <silent> <leader>e :FZF<cr>
