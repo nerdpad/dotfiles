@@ -526,6 +526,19 @@ call plug#begin('~/.config/nvim/plugged')
 		Plug 'Xuyuanp/nerdtree-git-plugin'
 		Plug 'ryanoasis/vim-devicons'
 		Plug 'jistr/vim-nerdtree-tabs'
+		Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+		let g:WebDevIconsOS = 'Darwin'
+		let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+		let g:DevIconsEnableFoldersOpenClose = 1
+		let g:DevIconsEnableFolderExtensionPatternMatching = 1
+		let NERDTreeDirArrowExpandable = "\u00a0" " make arrows invisible
+		let NERDTreeDirArrowCollapsible = "\u00a0" " make arrows invisible
+
+		augroup nerdtree
+				autocmd!
+				autocmd FileType nerdtree setlocal nolist " turn off whitespace characters
+				autocmd FileType nerdtree setlocal nocursorline " turn off line highlighting for performance
+		augroup END
 
 		" Toggle NERDTree
 		function! ToggleNerdTree()
@@ -624,6 +637,9 @@ call plug#begin('~/.config/nvim/plugged')
 	" vim-fugitive {{{
 		Plug 'tpope/vim-fugitive'
 		Plug 'tpope/vim-rhubarb' " hub extension for fugitive
+        Plug 'junegunn/gv.vim'
+        Plug 'sodapopcan/vim-twiggy'
+        Plug 'christoomey/vim-conflicted'
 		nmap <silent> <leader>gs :Gstatus<cr>
 		nmap <leader>ge :Gedit<cr>
 		nmap <silent><leader>gr :Gread<cr>
