@@ -144,13 +144,14 @@
     pager = less -FXRS -x2
     editor = vim
     whitespace = cr-at-eol
+	autocrlf = true
 [rerere]
     enabled = true
 [grep]
     extendRegexp = true
     lineNumber = true
 [credential]
-	helper = osxkeychain
+	helper = cache --timeout 3600
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]

@@ -20,6 +20,10 @@ if [ "$(uname)" == "Darwin" ]; then
     source install/brew.sh
 
     source install/osx.sh
+elif [ "$(uname)" == "Linux" ]; then
+    echo -e "\\n\\nRunning on Linux"
+
+    source install/ubuntu_apt.sh
 fi
 
 echo "creating vim directories"

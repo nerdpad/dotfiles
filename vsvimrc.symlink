@@ -1,0 +1,138 @@
+" General {{{
+	syntax on
+
+	" Searching
+	set ignorecase " case insensitive searching
+	set smartcase " case-sensitive if expresson contains a capital letter
+	set hlsearch " highlight search results
+	set incsearch " set incremental search, like modern browsers
+	set magic " Set magic on, for regex
+
+	" make backspace behave in a sane manner
+	set backspace=eol,start,indent
+	set clipboard=unnamed
+
+	" editing
+	set history=1000 " change history to 1000
+	set wrap
+	set number
+	set laststatus=2
+	set autoindent
+	set cursorline
+	set softtabstop=4 "go back one tab when hitting backspace(without this is goes back single space)
+	set tabstop=4 "used by >>, << and tab.
+	set shiftwidth=4 "number of space characters used when displaying TAB
+	set expandtab "Replate tab by spaces
+	set nostartofline
+	set ttimeout
+	set ttimeoutlen=50
+" }}}
+
+" General Mappings {{{
+	" set a map leader for more key combos
+	let mapleader = ','
+
+	" edit vimrc
+	nmap <leader>ev :e ~/.vsvimrc<cr>
+
+	" remap esc
+	inoremap jk <esc>
+
+	" shortcut to save
+	nmap <leader>, :w<cr>
+
+	" toggle invisible characters
+	nmap <leader>l :vsc Edit.ViewWhiteSpace<cr>
+
+	" clear highlighted search
+	noremap <space> :set hlsearch! hlsearch?<cr>
+
+	" enable . command in visual mode
+	vnoremap . :normal .<cr>
+" }}}
+
+" Surround {{{
+	" Surround simulating bindings
+	nnoremap s) ciw(<C-r>")<Esc>
+	nnoremap s] ciw[<C-r>"]<Esc>
+	nnoremap s} ciw{<C-r>"}<Esc>
+	nnoremap s> ciw<lt><C-r>"><Esc>
+	nnoremap s" ciw"<C-r>""<Esc>
+	nnoremap s' ciw'<C-r>"'<Esc>
+	nnoremap sw) ciW(<C-r>")<Esc>
+	nnoremap sw] ciW[<C-r>"]<Esc>
+	nnoremap sw} ciW{<C-r>"}<Esc>
+	nnoremap sw> ciW<lt><C-r>"><Esc>
+	nnoremap sw" ciW"<C-r>""<Esc>
+	nnoremap sw' ciW'<C-r>"'<Esc>
+
+	" Surround delete bindings
+	nnoremap ds) vi(dvhp
+	nnoremap ds] vi[dvhp
+	nnoremap ds} vi{dvhp
+	nnoremap ds> vi<dvhp
+	nnoremap ds" vi"dvhp
+	nnoremap ds' vi'dvhp
+
+	" Surround change bindings
+	nnoremap cs"' vi"oh<Esc>msvi"l<Esc>cl'<Esc>`scl'<Esc>
+	nnoremap cs'" vi'oh<Esc>msvi'l<Esc>cl"<Esc>`scl"<Esc>
+
+	" Surround visual selected text
+	vnoremap S" c"<C-r>""<Esc>
+	vnoremap S' c"<C-r>"'<Esc>
+	vnoremap S) c(<C-r>")<Esc>
+	vnoremap S] c[<C-r>"]<Esc>
+	vnoremap S} c{<C-r>"}<Esc>
+	vnoremap S> c<lt><C-r>"><Esc>
+	vnoremap S* c/*<C-r>"*/<Esc>
+	"vnoremap St c<lt>div><CR><C-r>"<Esc>
+	" Surround in div tag and edit tag
+	vnoremap St c<lt>div><CR><C-r>"<Esc>`<lt>lcw
+" }}}
+
+" Navigation {{{
+	nnoremap <leader>t :vsc Edit.GoToFile<cr>
+	" nnoremap <leader>t :vsc ReSharper.ReSharper_GotoFile<cr>
+	" go to anything ("tags"/types/symbols/files)	
+	nnoremap g/t :vsc Edit.GoToType<cr>
+	" nnoremap g/t :vsc ReSharper.ReSharper_GotoType<cr>
+	nnoremap gr :vsc Edit.FindAllReferences<cr>
+	" go to the type of the current symbol
+	nnoremap gD :vsc Edit.GoToDeclaration<cr>
+	nnoremap gI :vsc Edit.GoToImplementation<cr>
+
+	" grep everything
+	nnoremap g// :vsc Edit.FindinFiles<cr>
+	" find/replace in current buffer
+	nnoremap g/r :vsc Edit.Replace<cr>
+
+	nnoremap K     :vsc Edit.QuickInfo<cr>
+	" nnoremap <C-k> :vsc ReSharper.ReSharper_InspectThis<cr>
+	nnoremap gk    :vsc Edit.PeekDefinition<cr>
+" }}}
+
+" Refactoring {{{
+	" comment
+	nnoremap gc :vsc Edit.CommentSelection<cr>
+	nnoremap gcc :vsc Edit.UncommentSelection<cr>
+
+	nnoremap <leader>a :vsc Edit.RemoveAndSort<cr>
+	nnoremap <leader>f :vsc Edit.FormatDocument<cr>
+	vnoremap <leader>f :vsc Edit.FormatSelection<cr>
+" }}}
+
+" Window Management {{{
+	nnoremap <leader>wc :wq<cr>
+
+	nnoremap gof :vsc File.OpenContainingFolder<cr>
+	nnoremap got :vsc Tools.ExternalCommand2<cr>
+	" toggle 'Track Active Item in Solution Explorer' option
+	nnoremap cos :vsc View.TrackActivityinSolutionExplorer<cr>
+	" highlight active file in Solution Explorer (VS 2012+)
+	nnoremap ^ :vsc SolutionExplorer.SyncWithActiveDocument<cr>
+
+	nnoremap cow :vsc Edit.ToggleWordWrap<cr>
+	nnoremap <leader>k :vsc View.SolutionExplorer<cr>
+" }}}
+

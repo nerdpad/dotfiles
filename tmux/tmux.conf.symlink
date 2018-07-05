@@ -93,11 +93,13 @@ bind Escape copy-mode
 unbind p
 bind p paste-buffer
 bind -Tcopy-mode-vi 'v' send -X begin-selection
-bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+# bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+# bind -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "tmux save-buffer - | xclip -in -selection clipboard" \; display-message "copied to system clipboard"
+
 
 # Buffers to/from Mac clipboard, yay tmux book from pragprog
-bind C-c run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
-bind C-v run "tmux set-buffer $(reattach-to-user-namespace pbpaste); tmux paste-buffer"
+# bind C-c run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+# bind C-v run "tmux set-buffer $(reattach-to-user-namespace pbpaste); tmux paste-buffer"
 
 ##############################
 ### Color & Style Settings ###

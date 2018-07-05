@@ -1,4 +1,4 @@
-setopt NO_BG_NICE
+# setopt NO_BG_NICE
 setopt NO_HUP
 setopt NO_LIST_BEEP
 setopt LOCAL_OPTIONS
@@ -31,3 +31,7 @@ bindkey '^?' backward-delete-char
 
 fpath=($ZSH/functions $fpath)
 autoload -U $ZSH/functions/*(:t)
+
+if grep -q Microsoft /proc/version; then
+  unsetopt BG_NICE
+fi
