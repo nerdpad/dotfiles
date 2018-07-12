@@ -55,6 +55,10 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 2
 # Disable window animations and Get Info animations in Finder
 # defaults write com.apple.finder DisableAllAnimations -bool true
 
+# Reduces the time it takes for the Dock to show up
+defaults write com.apple.Dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -int 0.3
+
 echo "Use current directory as default search scope in Finder"
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
