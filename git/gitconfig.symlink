@@ -16,7 +16,7 @@
     s = status --short
     ss  = status
     br = branch -v
-    addnw="!sh -c 'git diff -U0 -w --no-color \"$@\" | git apply --cached --ignore-whitespace --unidiff-zero -'"
+    addnw = "!sh -c 'git diff -U0 -w --no-color \"$@\" | git apply --cached --ignore-whitespace --unidiff-zero -'"
 
     # rebase commands
     cont = rebase --continue
@@ -146,8 +146,6 @@
     whitespace = cr-at-eol
 [rerere]
     enabled = true
-[gitsh]
-    defaultCommand = s
 [grep]
     extendRegexp = true
     lineNumber = true
@@ -160,6 +158,7 @@
 	trustexitcode = true
 [rebase]
 	instructionFormat = "[%an - %ar] %s"
+	autoStash = true
 [pager]
     diff = "diff-so-fancy | less --tabs=4 -RFX"
     show = "diff-so-fancy | less --tabs=4 -RFX"
