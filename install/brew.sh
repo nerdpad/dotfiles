@@ -10,8 +10,8 @@ echo "=============================="
 
 formulas=(
     ack
+    bat
     diff-so-fancy
-    direnv
     dnsmasq
     fzf
     git
@@ -24,7 +24,6 @@ formulas=(
     node
     nginx
     python
-    rbenv
     reattach-to-user-namespace
     the_silver_searcher
     shellcheck
@@ -57,7 +56,7 @@ echo -e "\\n\\nRunning fzf install script..."
 echo "=============================="
 /usr/local/opt/fzf/install --all --no-bash --no-fish
 
-# after hte install, install neovim python libraries
+# after the install, install neovim python libraries
 echo -e "\\n\\nRunning Neovim Python install"
 echo "=============================="
 pip2 install --user neovim

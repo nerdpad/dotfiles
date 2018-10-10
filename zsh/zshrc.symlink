@@ -5,6 +5,7 @@ command_exists() {
     type "$1" > /dev/null 2>&1
 }
 
+
 # display how long all tasks over 10 seconds take
 export REPORTTIME=10
 
@@ -22,6 +23,7 @@ for config ($ZSH/**/*.zsh) source $config
 if [[ -a ~/.localrc ]]; then
     source ~/.localrc
 fi
+
 
 # initialize autocomplete
 autoload -U compinit add-zsh-hook
@@ -47,11 +49,6 @@ if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
 fi
 
-# install rbenv
-if command_exists rbenv; then
-    eval "$(rbenv init -)"
-fi
-
 # add a config file for ripgrep
 export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
 
@@ -69,26 +66,17 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-if command_exists direnv; then
-    eval "$(direnv hook zsh)"
-fi
-
-if [[ -d ~/.rvm ]]; then
-    PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
-    source ~/.rvm/scripts/rvm
-fi
-
 if [ -z ${RELOAD}  ]; then
     export ZPLUG_HOME=/usr/local/opt/zplug
     source $ZPLUG_HOME/init.zsh
     zplug 'zplug/zplug', hook-build:'zplug --self-manage'
     zplug 'zsh-users/zsh-syntax-highlighting', defer:2
     zplug 'zsh-users/zsh-autosuggestions'
-    zplug 'plugins/ssh-agent', from:oh-my-zsh, ignore:oh-my-zsh.sh
-    zplug 'djui/alias-tips'
 
-    export NVM_AUTO_USE=false
-    export NVM_NO_USE=true
+    zplug 'plugins/ssh-agent', from:oh-my-zsh, ignore:oh-my-zsh.sh
+
+    export NVM_AUTO_USE=true
+    # export NVM_NO_USE=true
     zplug 'lukechilds/zsh-nvm'
 
     # git
@@ -105,6 +93,16 @@ if [ -z ${RELOAD}  ]; then
     zplug load
 fi
 
+# alias git to hub
+if command_exists hub; then
+    eval "$(hub alias -s)"
+fi
+
+# move to next word with ctrl-F
+bindkey -M viins "^F" vi-forward-word
+# Move to end of line with ctrl-E
+bindkey -M viins "^E" vi-add-eol
+
 # Better history
 # Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
 autoload -U up-line-or-beginning-search
@@ -117,11 +115,6 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 # autosuggestions
 bindkey "^K" up-line-or-beginning-search # Up
 bindkey "^J" down-line-or-beginning-search # Down
-
-# alias git to hub
-if command_exists hub; then
-    eval "$(hub alias -s)"
-fi
 
 # add color to man pages
 export MANROFFOPT='-c'
