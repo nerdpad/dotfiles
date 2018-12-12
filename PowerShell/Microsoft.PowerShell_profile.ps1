@@ -1,11 +1,15 @@
 # General Configurations
+# Correct the HOME Share overridden by Domain Policies
+$env:HOMEDRIVE="C:"
+$env:HOMEPATH="\Users\$($env:USERNAME)"
+$env:HOMESHARE="\\localhost\C$\Users\$($env:USERNAME)"
 
 # Turn of bell
 Set-PSReadlineOption -BellStyle None
 
 # SSH
 Start-SshAgent >$null
-Add-SshKey (Resolve-Path ~/.ssh/id_rsa) >$null
+# Add-SshKey (Resolve-Path ~/.ssh/id_rsa) >$null
 
 # alias
 . $PSScriptRoot\ps\aliases.ps1

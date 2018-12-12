@@ -120,6 +120,8 @@
 	nnoremap <leader>a :vsc Edit.RemoveAndSort<cr>
 	nnoremap <leader>f :vsc Edit.FormatDocument<cr>
 	vnoremap <leader>f :vsc Edit.FormatSelection<cr>
+
+    nnoremap <leader><space> :%s/\s\+$//e<cr>
 " }}}
 
 " Window Management {{{

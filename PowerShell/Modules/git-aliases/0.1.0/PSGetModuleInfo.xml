@@ -7,15 +7,15 @@
     </TN>
     <MS>
       <S N="Name">git-aliases</S>
-      <Version N="Version">0.0.1</Version>
+      <Version N="Version">0.1.0</Version>
       <S N="Type">Module</S>
       <S N="Description">A PowerShell module that provide partial Git aliases from Oh My Zsh's git plugin.</S>
       <S N="Author">Saran Tanpituckpong</S>
       <S N="CompanyName">Illuminator</S>
       <S N="Copyright">(c) Saran Tanpituckpong. All rights reserved.</S>
-      <DT N="PublishedDate">2018-03-24T12:06:59-04:00</DT>
+      <DT N="PublishedDate">2018-09-01T05:36:21-04:00</DT>
       <Obj N="InstalledDate" RefId="1">
-        <DT>2018-08-21T19:36:39.8770443-04:00</DT>
+        <DT>2018-10-12T10:54:36.5023564-04:00</DT>
         <MS>
           <Obj N="DisplayHint" RefId="2">
             <TN RefId="1">
@@ -54,19 +54,8 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">RoleCapability</S>
-            <Obj N="Value" RefId="5">
-              <TNRef RefId="2" />
-              <LST />
-            </Obj>
-          </En>
-          <En>
-            <S N="Key">Workflow</S>
-            <Ref N="Value" RefId="5" />
-          </En>
-          <En>
             <S N="Key">Command</S>
-            <Obj N="Value" RefId="6">
+            <Obj N="Value" RefId="5">
               <TNRef RefId="2" />
               <LST>
                 <S>g</S>
@@ -187,12 +176,15 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">Cmdlet</S>
-            <Ref N="Value" RefId="5" />
+            <S N="Key">DscResource</S>
+            <Obj N="Value" RefId="6">
+              <TNRef RefId="2" />
+              <LST />
+            </Obj>
           </En>
           <En>
-            <S N="Key">DscResource</S>
-            <Ref N="Value" RefId="5" />
+            <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="6" />
           </En>
           <En>
             <S N="Key">Function</S>
@@ -316,6 +308,14 @@
               </LST>
             </Obj>
           </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="6" />
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="6" />
+          </En>
         </DCT>
       </Obj>
       <Nil N="PowerShellGetFormatVersion" />
@@ -335,26 +335,27 @@
         <MS>
           <S N="copyright">(c) Saran Tanpituckpong. All rights reserved.</S>
           <S N="description">A PowerShell module that provide partial Git aliases from Oh My Zsh's git plugin.</S>
-          <S N="requireLicenseAcceptance">True</S>
+          <S N="requireLicenseAcceptance">False</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">True</S>
-          <S N="versionDownloadCount">70</S>
-          <S N="downloadCount">70</S>
-          <S N="packageSize">10350</S>
-          <S N="published">3/24/2018 12:06:59 PM -04:00</S>
-          <S N="created">3/24/2018 12:06:59 PM -04:00</S>
-          <S N="lastEdited">3/24/2018 12:08:46 PM -04:00</S>
+          <S N="versionDownloadCount">29</S>
+          <S N="downloadCount">109</S>
+          <S N="packageSize">10994</S>
+          <S N="published">9/1/2018 5:36:21 AM -04:00</S>
+          <S N="created">9/1/2018 5:36:21 AM -04:00</S>
+          <S N="lastUpdated">10/7/2018 6:53:00 PM -04:00</S>
           <S N="tags">git alias aliases oh-my-zsh PSModule PSFunction_g PSCommand_g PSFunction_ga PSCommand_ga PSFunction_gaa PSCommand_gaa PSFunction_gapa PSCommand_gapa PSFunction_gau PSCommand_gau PSFunction_gb PSCommand_gb PSFunction_gba PSCommand_gba PSFunction_gbda PSCommand_gbda PSFunction_gbl PSCommand_gbl PSFunction_gbnm PSCommand_gbnm PSFunction_gbr PSCommand_gbr PSFunction_gbs PSCommand_gbs PSFunction_gbsb PSCommand_gbsb PSFunction_gbsg PSCommand_gbsg PSFunction_gbsr PSCommand_gbsr PSFunction_gbss PSCommand_gbss PSFunction_gc PSCommand_gc PSFunction_gc! PSCommand_gc! PSFunction_gca PSCommand_gca PSFunction_gcam PSCommand_gcam PSFunction_gca! PSCommand_gca! PSFunction_gcan! PSCommand_gcan! PSFunction_gcb PSCommand_gcb PSFunction_gcf PSCommand_gcf PSFunction_gcl PSCommand_gcl PSFunction_gclean PSCommand_gclean PSFunction_gcm PSCommand_gcm PSFunction_gcd PSCommand_gcd PSFunction_gcmsg PSCommand_gcmsg PSFunction_gco PSCommand_gco PSFunction_gcount PSCommand_gcount PSFunction_gcp PSCommand_gcp PSFunction_gcpa PSCommand_gcpa PSFunction_gcpc PSCommand_gcpc PSFunction_gcs PSCommand_gcs PSFunction_gd PSCommand_gd PSFunction_gdca PSCommand_gdca PSFunction_gdt PSCommand_gdt PSFunction_gdw PSCommand_gdw PSFunction_gf PSCommand_gf PSFunction_gfa PSCommand_gfa PSFunction_gfo PSCommand_gfo PSFunction_gg PSCommand_gg PSFunction_gga PSCommand_gga PSFunction_ggf PSCommand_ggf PSFunction_ghh PSCommand_ghh PSFunction_ggsup PSCommand_ggsup PSFunction_gpsup PSCommand_gpsup PSFunction_gignore PSCommand_gignore PSFunction_gignored PSCommand_gignored PSFunction_gl PSCommand_gl PSFunction_glg PSCommand_glg PSFunction_glgg PSCommand_glgg PSFunction_glgga PSCommand_glgga PSFunction_glgm PSCommand_glgm PSFunction_glgp PSCommand_glgp PSFunction_glo PSCommand_glo PSFunction_glog PSCommand_glog PSFunction_glol PSCommand_glol PSFunction_glola PSCommand_glola PSFunction_gm PSCommand_gm PSFunction_gmom PSCommand_gmom PSFunction_gmt PSCommand_gmt PSFunction_gmtvim PSCommand_gmtvim PSFunction_gmum PSCommand_gmum PSFunction_gp PSCommand_gp PSFunction_gpd PSCommand_gpd PSFunction_gpoat PSCommand_gpoat PSFunction_gpristine PSCommand_gpristine PSFunction_gpu PSCommand_gpu PSFunction_gpv PSCommand_gpv PSFunction_gr PSCommand_gr PSFunction_gra PSCommand_gra PSFunction_grb PSCommand_grb PSFunction_grba PSCommand_grba PSFunction_grbc PSCommand_grbc PSFunction_grbi PSCommand_grbi PSFunction_grbm PSCommand_grbm PSFunction_grbs PSCommand_grbs PSFunction_grh PSCommand_grh PSFunction_grhh PSCommand_grhh PSFunction_grmv PSCommand_grmv PSFunction_grrm PSCommand_grrm PSFunction_grset PSCommand_grset PSFunction_grt PSCommand_grt PSFunction_gru PSCommand_gru PSFunction_grup PSCommand_grup PSFunction_grv PSCommand_grv PSFunction_gsb PSCommand_gsb PSFunction_gsd PSCommand_gsd PSFunction_gsi PSCommand_gsi PSFunction_gsps PSCommand_gsps PSFunction_gsr PSCommand_gsr PSFunction_gss PSCommand_gss PSFunction_gst PSCommand_gst PSFunction_gsta PSCommand_gsta PSFunction_gstaa PSCommand_gstaa PSFunction_gstd PSCommand_gstd PSFunction_gstl PSCommand_gstl PSFunction_gstp PSCommand_gstp PSFunction_gstc PSCommand_gstc PSFunction_gsts PSCommand_gsts PSFunction_gsu PSCommand_gsu PSFunction_gts PSCommand_gts PSFunction_gunignore PSCommand_gunignore PSFunction_gunwip PSCommand_gunwip PSFunction_gup PSCommand_gup PSFunction_gupv PSCommand_gupv PSFunction_glum PSCommand_glum PSFunction_gvt PSCommand_gvt PSFunction_gwch PSCommand_gwch PSFunction_gwip PSCommand_gwip PSFunction_Get-Git-CurrentBranch PSCommand_Get-Git-CurrentBranch PSFunction_Remove-Alias PSCommand_Remove-Alias PSIncludes_Function</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2018-08-21T16:37:52Z</S>
-          <S N="NormalizedVersion">0.0.1</S>
+          <S N="updated">2018-10-07T18:53:00Z</S>
+          <S N="NormalizedVersion">0.1.0</S>
+          <S N="Authors">Saran Tanpituckpong</S>
           <S N="IsPrerelease">false</S>
           <S N="ItemType">Module</S>
           <S N="FileList">git-aliases.nuspec|aliases.ps1|git-aliases.psd1|git-aliases.psm1|utils.ps1</S>
           <S N="GUID">fe7345a7-0e7f-43d6-b924-3fe93c8f8fe7</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\zzakaria\Documents\PowerShell\Modules\git-aliases\0.0.1</S>
+      <S N="InstalledLocation">C:\Users\zzakaria\Documents\PowerShell\Modules\git-aliases\0.1.0</S>
     </MS>
   </Obj>
 </Objs>

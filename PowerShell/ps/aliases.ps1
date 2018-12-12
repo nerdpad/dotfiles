@@ -43,3 +43,29 @@ New-Alias ddi Delete-DanglingDockerImages
 New-Alias dcr Delete-AllDockerContainers
 New-Alias drmi Delete-AllDockerImages
 New-Alias dcu Docker-CleanUp
+
+# Astro Air
+function BuildAstroAir-Watch() {
+	npm run build:dev -- --watch -op "C:\\code\\airw\\canonical\\Console\\Web\\src\\WebSln\\WanderingWiFi.AirWatch.Console.Web\\Scripts\\AstroAir\\dist"
+}
+
+function BuildAstroAir() {
+	npm run build:dev -- -op "C:\\code\\airw\\canonical\\Console\\Web\\src\\WebSln\\WanderingWiFi.AirWatch.Console.Web\\Scripts\\AstroAir\\dist"
+}
+
+New-Alias baaw BuildAstroAir-Watch
+New-Alias baa BuildAstroAir
+
+# Git
+function Assume-UnChanged([string]$file) {
+	git update-index --assume-unchanged $file
+}
+
+function NoAssume-UnChanged([string]$file) {
+	git update-index --no-assume-unchanged $file
+}
+
+function ListAssume-UnChanged() {
+	git ls-files -v | Select-String -Pattern "^H\^"
+}
+

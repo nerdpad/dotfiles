@@ -25,7 +25,7 @@
       <S N="Copyright">(c) 2010-2018 Keith Dahlby and contributors</S>
       <DT N="PublishedDate">2018-05-14T03:30:34-04:00</DT>
       <Obj N="InstalledDate" RefId="2">
-        <DT>2018-08-21T14:34:01.2881095-04:00</DT>
+        <DT>2018-10-12T10:57:30.9768469-04:00</DT>
         <MS>
           <Obj N="DisplayHint" RefId="3">
             <TN RefId="2">
@@ -63,15 +63,8 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Workflow</S>
-            <Obj N="Value" RefId="6">
-              <TNRef RefId="1" />
-              <LST />
-            </Obj>
-          </En>
-          <En>
             <S N="Key">Command</S>
-            <Obj N="Value" RefId="7">
+            <Obj N="Value" RefId="6">
               <TNRef RefId="1" />
               <LST>
                 <S>Add-PoshGitToProfile</S>
@@ -100,6 +93,17 @@
                 <S>tgit</S>
               </LST>
             </Obj>
+          </En>
+          <En>
+            <S N="Key">DscResource</S>
+            <Obj N="Value" RefId="7">
+              <TNRef RefId="1" />
+              <LST />
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="7" />
           </En>
           <En>
             <S N="Key">Function</S>
@@ -134,16 +138,12 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">DscResource</S>
-            <Ref N="Value" RefId="6" />
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="7" />
           </En>
           <En>
             <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="6" />
-          </En>
-          <En>
-            <S N="Key">Cmdlet</S>
-            <Ref N="Value" RefId="6" />
+            <Ref N="Value" RefId="7" />
           </En>
         </DCT>
       </Obj>
@@ -168,15 +168,17 @@
           <S N="releaseNotes">https://github.com/dahlbyk/posh-git/blob/v1.0.0-beta2/CHANGELOG.md</S>
           <S N="isLatestVersion">False</S>
           <S N="isAbsoluteLatestVersion">True</S>
-          <S N="versionDownloadCount">3167</S>
-          <S N="downloadCount">127918</S>
+          <S N="versionDownloadCount">5042</S>
+          <S N="downloadCount">145295</S>
           <S N="packageSize">38967</S>
           <S N="published">5/14/2018 3:30:34 AM -04:00</S>
           <S N="created">5/14/2018 3:30:34 AM -04:00</S>
+          <S N="lastUpdated">10/12/2018 2:29:46 PM -04:00</S>
           <S N="tags">git prompt tab tab-completion tab-expansion tabexpansion PSEdition_Core PSModule PSFunction_Add-PoshGitToProfile PSCommand_Add-PoshGitToProfile PSFunction_Expand-GitCommand PSCommand_Expand-GitCommand PSFunction_Format-GitBranchName PSCommand_Format-GitBranchName PSFunction_Get-GitBranchStatusColor PSCommand_Get-GitBranchStatusColor PSFunction_Get-GitStatus PSCommand_Get-GitStatus PSFunction_Get-GitDirectory PSCommand_Get-GitDirectory PSFunction_Get-PromptPath PSCommand_Get-PromptPath PSFunction_Update-AllBranches PSCommand_Update-AllBranches PSFunction_Write-GitStatus PSCommand_Write-GitStatus PSFunction_Write-GitBranchName PSCommand_Write-GitBranchName PSFunction_Write-GitBranchStatus PSCommand_Write-GitBranchStatus PSFunction_Write-GitIndexStatus PSCommand_Write-GitIndexStatus PSFunction_Write-GitStashCount PSCommand_Write-GitStashCount PSFunction_Write-GitWorkingDirStatus PSCommand_Write-GitWorkingDirStatus PSFunction_Write-GitWorkingDirStatusSummary PSCommand_Write-GitWorkingDirStatusSummary PSFunction_Write-Prompt PSCommand_Write-Prompt PSFunction_Write-VcsStatus PSCommand_Write-VcsStatus PSFunction_Get-SshAgent PSCommand_Get-SshAgent PSFunction_Start-SshAgent PSCommand_Start-SshAgent PSFunction_Stop-SshAgent PSCommand_Stop-SshAgent PSFunction_Add-SshKey PSCommand_Add-SshKey PSFunction_Get-SshPath PSCommand_Get-SshPath PSFunction_TabExpansion PSCommand_TabExpansion PSFunction_tgit PSCommand_tgit PSIncludes_Function</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2018-08-21T18:32:53Z</S>
+          <S N="updated">2018-10-12T14:29:46Z</S>
           <S N="NormalizedVersion">1.0.0-beta2</S>
+          <S N="Authors">Keith Dahlby and contributors</S>
           <S N="IsPrerelease">true</S>
           <S N="ItemType">Module</S>
           <S N="FileList">posh-git.nuspec|AnsiUtils.ps1|CheckRequirements.ps1|ConsoleMode.ps1|GitParamTabExpansion.ps1|GitPrompt.ps1|GitTabExpansion.ps1|GitUtils.ps1|posh-git.psd1|posh-git.psm1|PoshGitTypes.ps1|SshUtils.ps1|TortoiseGit.ps1|Utils.ps1|en-US\about_posh-git.help.txt</S>
