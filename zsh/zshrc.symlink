@@ -1,11 +1,6 @@
 export DOTFILES=$HOME/.dotfiles
 export ZSH=$DOTFILES/zsh
 
-command_exists() {
-    type "$1" > /dev/null 2>&1
-}
-
-
 # display how long all tasks over 10 seconds take
 export REPORTTIME=10
 
@@ -18,7 +13,16 @@ if [[ -d ~/code ]]; then
 fi
 
 # source all .zsh files inside of the zsh/ directory
-for config ($ZSH/**/*.zsh) source $config
+source "$ZSH/utils.zsh"
+source "$ZSH/prompt.zsh"
+source "$ZSH/aliases.zsh"
+source "$ZSH/colors.zsh"
+source "$ZSH/completion.zsh"
+source "$ZSH/config.zsh"
+source "$ZSH/functions.zsh"
+source "$ZSH/git.zsh"
+source "$ZSH/tmux.zsh"
+source "$ZSH/z.zsh"
 
 if [[ -a ~/.localrc ]]; then
     source ~/.localrc
@@ -94,7 +98,7 @@ if [ -z ${RELOAD}  ]; then
 fi
 
 # alias git to hub
-if command_exists hub; then
+if type hub > /dev/null 2>&1; then
     eval "$(hub alias -s)"
 fi
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if test ! "$( which brew )"; then
+if test ! "$( command -v brew )"; then
     echo "Installing homebrew"
     ruby -e "$( curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install )"
 fi
@@ -9,7 +9,6 @@ echo -e "\\n\\nInstalling homebrew packages..."
 echo "=============================="
 
 formulas=(
-    ack
     bat
     diff-so-fancy
     dnsmasq
@@ -20,9 +19,8 @@ formulas=(
     hub
     markdown
     mas
-    neovim/neovim/neovim
+    neovim
     node
-    nginx
     python
     reattach-to-user-namespace
     the_silver_searcher
@@ -63,7 +61,7 @@ pip2 install --user neovim
 pip3 install --user neovim
 
 # Change the default shell to zsh
-zsh_path="$( which zsh )"
+zsh_path="$( command -v zsh )"
 if ! grep "$zsh_path" /etc/shells; then
     echo "adding $zsh_path to /etc/shells"
     echo "$zsh_path" | sudo tee -a /etc/shells
