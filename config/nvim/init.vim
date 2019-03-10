@@ -70,6 +70,14 @@ call plug#begin('~/.config/nvim/plugged')
     set wildmode=list:longest " complete files like a shell
     set scrolloff=3 " lines of text around cursor
     set shell=$SHELL
+	
+	" Powershell {{{
+	if has('win32')
+		set shell=pwsh
+		set shellcmdflag=-command
+	endif
+	" }}}
+	
     set cmdheight=1 " command bar height
     set title " set terminal title
     set showmatch " show matching braces

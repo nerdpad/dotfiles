@@ -8,8 +8,6 @@
 	set incsearch " set incremental search, like modern browsers
 	set magic " Set magic on, for regex
 
-	" make backspace behave in a sane manner
-	set backspace=eol,start,indent
 	set clipboard=unnamed
 
 	" editing
@@ -17,15 +15,14 @@
 	set wrap
 	set number
 	set laststatus=2
-	set autoindent
 	set cursorline
-	set softtabstop=4 "go back one tab when hitting backspace(without this is goes back single space)
-	set tabstop=4 "used by >>, << and tab.
-	set shiftwidth=4 "number of space characters used when displaying TAB
-	set expandtab "Replate tab by spaces
 	set nostartofline
 	set ttimeout
 	set ttimeoutlen=50
+	
+	" VSVIM specific
+	set vsvim_useeditorindent
+	set vsvim_useeditordefaults
 " }}}
 
 " General Mappings {{{
@@ -92,11 +89,11 @@
 " }}}
 
 " Navigation {{{
-	nnoremap <leader>t :vsc Edit.GoToFile<cr>
-	" nnoremap <leader>t :vsc ReSharper.ReSharper_GotoFile<cr>
+	" nnoremap <leader>t :vsc Edit.GoToFile<cr>
+	nnoremap <leader>t :vsc ReSharper.ReSharper_GotoFile<cr>
 	" go to anything ("tags"/types/symbols/files)	
-	nnoremap g/t :vsc Edit.GoToType<cr>
-	" nnoremap g/t :vsc ReSharper.ReSharper_GotoType<cr>
+	" nnoremap g/t :vsc Edit.GoToType<cr>
+	nnoremap g/t :vsc ReSharper.ReSharper_GotoType<cr>
 	nnoremap gr :vsc Edit.FindAllReferences<cr>
 	" go to the type of the current symbol
 	nnoremap gD :vsc Edit.GoToDeclaration<cr>
@@ -116,6 +113,9 @@
 	" comment
 	nnoremap gc :vsc Edit.CommentSelection<cr>
 	nnoremap gcc :vsc Edit.UncommentSelection<cr>
+	
+	vnoremap gc :vsc Edit.CommentSelection<cr>
+	vnoremap gcc :vsc Edit.UncommentSelection<cr>
 
 	nnoremap <leader>a :vsc Edit.RemoveAndSort<cr>
 	nnoremap <leader>f :vsc Edit.FormatDocument<cr>

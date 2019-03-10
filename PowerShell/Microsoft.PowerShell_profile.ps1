@@ -5,14 +5,14 @@ $env:HOMEPATH="\Users\$($env:USERNAME)"
 $env:HOMESHARE="\\localhost\C$\Users\$($env:USERNAME)"
 
 # Turn of bell
-Set-PSReadlineOption -BellStyle None
+# Set-PSReadlineOption -BellStyle None
 
 # SSH
 Start-SshAgent >$null
 # Add-SshKey (Resolve-Path ~/.ssh/id_rsa) >$null
 
 # alias
-. $PSScriptRoot\ps\aliases.ps1
+Import-Module $PSScriptRoot\ps\aliases.psm1
 
 # color directory listing
 Set-Alias ls Get-ChildItemColor -option AllScope -Force
@@ -35,3 +35,20 @@ $GitPromptSettings.DefaultPromptPrefix = '$env:USERNAME@$(hostname) '
 # Import Modules
 Import-Module Get-ChildItemColor
 Import-Module posh-git
+
+# VIM
+$VIMPATH = "C:\tools\neovim\Neovim\bin\nvim.exe"
+
+Set-Alias vi $VIMPATH
+Set-Alias vim $VIMPATH
+
+$env:XDG_CONFIG_HOME = "c:\Users\zzakaria\.config"
+
+# For editing Profiles
+function Edit-Profile() {
+	vim $profile
+}
+
+function Edit-Vimrc() {
+	vim $home\.vimrc
+}
