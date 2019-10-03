@@ -111,6 +111,11 @@ function gs {
 	git status $args
 }
 
+# Basleine
+function pbs() {
+	Invoke-WebRequest 'https://zzakaria-w03.vmware.com/BaselineService/ping'
+}
+
 # Export all aliases
 $FunctionsToExport = @(
 	# misc
@@ -137,6 +142,9 @@ $FunctionsToExport = @(
 	
 	# git
 	'gs',
+	
+	# local
+	'pbs',
 	
 	# docker
 	'drmi',
