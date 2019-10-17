@@ -14,13 +14,12 @@ formulas=(
     dnsmasq
     fzf
     git
-    'grep --with-default-names'
+    grep
     highlight
     hub
     markdown
     mas
     neovim
-    node
     python
     reattach-to-user-namespace
     the_silver_searcher
@@ -35,9 +34,7 @@ formulas=(
     ripgrep
     git-standup
     entr
-    zplug
-    ctags
-    peco
+    yarn
 )
 
 for formula in "${formulas[@]}"; do
@@ -57,8 +54,7 @@ echo "=============================="
 # after the install, install neovim python libraries
 echo -e "\\n\\nRunning Neovim Python install"
 echo "=============================="
-pip2 install --user neovim
-pip3 install --user neovim
+pip3 install pynvim
 
 # Change the default shell to zsh
 zsh_path="$( command -v zsh )"

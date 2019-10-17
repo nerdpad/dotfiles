@@ -44,12 +44,26 @@ snippet ima "import * as " b
 import * as $1 from '$2'
 endsnippet
 
-snippet dojowidget "Start a new Dojo 2 Widget"
-import WidgetBase from '@dojo/widget-core/WidgetBase';
-import { v } from '@dojo/widget-core/d';
-import { theme, ThemedMixin } from '@dojo/widget-core/mixins/Theme';
+snippet dojotsx "Start a new Dojo Widget"
+import { WidgetBase } from '@dojo/framework/core/WidgetBase';
+import { tsx } from '@dojo/framework/core/vdom';
 
-export default ${1:Widget} extends ThemedMixin(WidgetBase) {
-	$2
+export interface $1Properties {
 }
+
+export class $1 extends WidgetBase<$1Properties> {
+	protected render() {
+		return (
+			<div/>
+		);
+	}
+}
+
+export default $1;
+endsnippet
+
+snippet dojotest "Start a new dojo test file"
+import assertionTemplate from '@dojo/framework/testing/assertionTemplate';
+import harness from '@dojo/framework/testing/harness';
+import { tsx } from '@dojo/framework/core/vdom';
 endsnippet
