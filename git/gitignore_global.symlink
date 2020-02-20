@@ -20,7 +20,7 @@ tags
 
 # project-specific vim configurations
 .vimrc.local
-Session.vim
+.vim/coc-settings.json
 
 # typescript command garbage
 tscommand*.txt
@@ -30,8 +30,3 @@ tscommand*.txt
 
 # npm things
 npm-debug.log
-
-# misc
-zz_changes.patch
-.byebug-history
-buildinfo.json
