@@ -344,9 +344,6 @@ call plug#begin('~/.config/nvim/plugged')
     " substitute, search, and abbreviate multiple variants of a word
     Plug 'tpope/vim-abolish'
 
-    " search inside files using ripgrep. This plugin provides an Ack command.
-    Plug 'wincent/ferret'
-
     " insert or delete brackets, parens, quotes in pair
     Plug 'jiangmiao/auto-pairs'
 
@@ -457,7 +454,7 @@ call plug#begin('~/.config/nvim/plugged')
             endif
         endfunction
         " toggle nerd tree
-        nmap <silent> <leader>k :call ToggleNerdTree()<cr>
+        nmap <silent> <leader>n :call ToggleNerdTree()<cr>
         " find the current file in nerdtree without needing to reload the drawer
         nmap <silent> <leader>y :NERDTreeFind<cr>
 
@@ -539,7 +536,6 @@ call plug#begin('~/.config/nvim/plugged')
         nmap <silent><leader>gb :Gblame<cr>
 
         Plug 'tpope/vim-rhubarb' " hub extension for fugitive
-        Plug 'junegunn/gv.vim'
         Plug 'sodapopcan/vim-twiggy'
     " }}}
 
@@ -597,7 +593,8 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'coc-vimlsp',
         \ 'coc-emmet',
         \ 'coc-prettier',
-        \ 'coc-ultisnips'
+        \ 'coc-ultisnips',
+        \ 'coc-explorer'
         \ ]
 
         autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -611,6 +608,8 @@ call plug#begin('~/.config/nvim/plugged')
         nmap ]g <Plug>(coc-git-nextchunk)
         nmap gs <Plug>(coc-git-chunkinfo)
         nmap gu :CocCommand git.chunkUndo<cr>
+
+        nmap <silent> <leader>k :CocCommand explorer<cr>
 
         "remap keys for gotos
         nmap <silent> gd <Plug>(coc-definition)
@@ -676,7 +675,10 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] }
 
 		" nunjucks support
-        Plug 'niftylettuce/vim-jinja', { 'for': 'njk' }
+        Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'njk' }
+
+        " liquid support
+        Plug 'tpope/vim-liquid'
     " }}}
 
     " JavaScript {{{
