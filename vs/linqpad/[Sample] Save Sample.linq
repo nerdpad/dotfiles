@@ -1,4 +1,11 @@
 <Query Kind="Program">
+  <Connection>
+    <ID>5cf7bc21-4c82-40fd-a3bb-9c1a76fa35af</ID>
+    <Persist>true</Persist>
+    <Server>localhost</Server>
+    <Database>AirWatchDev</Database>
+    <ShowServer>true</ShowServer>
+  </Connection>
   <NuGetReference>Newtonsoft.Json</NuGetReference>
   <Namespace>Newtonsoft.Json</Namespace>
   <Namespace>Newtonsoft.Json.Bson</Namespace>
@@ -12,19 +19,19 @@ void Main()
 {
 	var policies = new List<Policy>
 	{
-		new Policy { UUID = Guid.Parse("5c66a4a3-5345-5be9-ae04-eb0779ad3e73"), ErrorCode = 5001 },
-		new Policy { UUID = Guid.Parse("54e261f4-2d43-5a74-a0aa-466f438d0724"), ErrorCode = 5000 }
+		new Policy { UUID = Guid.Parse("81DA6661-BD7F-5D0B-841E-00C5BC935E8E"), ErrorCode = 5001 },
+		new Policy { UUID = Guid.Parse("3331EA8F-C93C-57B0-A30F-065DB72F59B3"), ErrorCode = 5000 }
 	};
 	
 	var samples = new List<Sample>
 	{
-		new Sample {BaselineID = 4133, BaselineStatusID = 4, Version = 3, ErrorCode = null, ErrorMessage = null, PolicyCount = 100, CompliantPolicyCount = 98, ComplianceLevel = 98, NonCompliantPolicies = policies }
+		new Sample {BaselineID = 4146, BaselineStatusID = 4, Version = 1, ErrorCode = null, ErrorMessage = null, PolicyCount = 100, CompliantPolicyCount = 98, ComplianceLevel = 98, NonCompliantPolicies = policies }
 	};
 
 	using (var con = new SqlConnection("Data Source=localhost;Integrated Security=SSPI;Initial Catalog=AirWatchDev"))
 	using (var cmd = new SqlCommand("interrogator.BaselineSample_Save", con) { CommandType = System.Data.CommandType.StoredProcedure })
 	{
-		var sampleList = this.GetBaselinePolicyTable(6, DateTime.Now, samples);
+		var sampleList = this.GetBaselinePolicyTable(10, DateTime.Now, samples);
 		var paramSamples = new SqlParameter("@BaselineSampleList", sampleList) { SqlDbType = SqlDbType.Structured };
 
 		cmd.Parameters.Add(paramSamples);

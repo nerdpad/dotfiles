@@ -48,7 +48,7 @@
 	vnoremap . :normal .<cr>
 " }}}
 
-" Surround {{{
+"  {{{
 	" Surround simulating bindings
 	nnoremap s) ciw(<C-r>")<Esc>
 	nnoremap s] ciw[<C-r>"]<Esc>
@@ -89,11 +89,12 @@
 " }}}
 
 " Navigation {{{
-	" nnoremap <leader>t :vsc Edit.GoToFile<cr>
-	nnoremap <leader>t :vsc ReSharper.ReSharper_GotoFile<cr>
+	nnoremap <leader>t :vsc Edit.GoToFile<cr>
+	" nnoremap <leader>t :vsc ReSharper.ReSharper_GotoFile<cr>
 	" go to anything ("tags"/types/symbols/files)	
-	" nnoremap g/t :vsc Edit.GoToType<cr>
-	nnoremap g/t :vsc ReSharper.ReSharper_GotoType<cr>
+	nnoremap g/t :vsc Edit.GoToType<cr>
+	" nnoremap g/t :vsc ReSharper.ReSharper_GotoType<cr>
+	" nnoremap gr :vsc ReSharper.ReSharper_FindUsages<cr>
 	nnoremap gr :vsc Edit.FindAllReferences<cr>
 	" go to the type of the current symbol
 	nnoremap gD :vsc Edit.GoToDeclaration<cr>
