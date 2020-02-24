@@ -1,164 +1,119 @@
-" General {{{
-  " Abbreviations
-  abbr funciton function
-  abbr teh the
-  abbr tempalte template
-  abbr fitler filter
-  abbr cosnt const
-  abbr attribtue attribute
-  abbr attribuet attribute
+" https://github.com/JetBrains/ideavim#executing-ide-action
+" Find IDE actions by name pattern:
+"	:actionlist [pattern]
 
-  set autoread " detect when a file is changed
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  set history=1000 " change history to 1000
-  set textwidth=180
+set ideajoin
+set number
 
-  set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-  set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+" Searching
+set ignorecase " case insensitive searching
+set smartcase " case-sensitive if expresson contains a capital letter
+set hlsearch " highlight search result
+set incsearch " set incremental search, like modern browser
+set magic " Set magic on, for regex
 
-  set backspace=indent,eol,start " make backspace behave in a sane manner
-  set clipboard=unnamed
+set clipboard=unnamed
 
-  " Searching
-  set ignorecase " case insensitive searching
-  set smartcase " case-sensitive if expresson contains a capital letter
-  set hlsearch " highlight search results
-  set incsearch " set incremental search, like modern browsers
-  set nolazyredraw " don't redraw while executing macros
+set scrolloff=5
 
-  set magic " Set magic on, for regex
+set showmode
+set surround
 
-  " error bells
-  set noerrorbells
-  set visualbell
-  set t_vb=
-  set tm=500
-" }}}
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mapping
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Appearance {{{
-  set number " show line numbers
-  set wrap " turn on line wrapping
-  set wrapmargin=4 " wrap lines when coming within n characters from side
-  set linebreak " set soft wrapping
-  set showbreak=… " show ellipsis at breaking
-  set autoindent " automatically set indent of new line
-  set smartindent
+" remap ESC
+inoremap jk <Esc>
+vnoremap jk <Esc>
 
-  " set breakindent
-  set ttyfast " faster redrawing
-  set diffopt+=vertical
-  set laststatus=2 " show the satus line all the time
-  set so=7 " set 7 lines to the cursors - when moving vertical
-  set wildmenu " enhanced command line completion
-  set hidden " current buffer can be put into background
-  set showcmd " show incomplete commands
-  set noshowmode " don't show which mode disabled for PowerLine
-  set wildmode=list:longest " complete files like a shell
-  set scrolloff=3 " lines of text around cursor
-  set shell=$SHELL
-  set cmdheight=1 " command bar height
-  set title " set terminal title
-  set showmatch " show matching braces
-  set mat=2 " how many tenths of a second to blink
+" set a map leader for more key combo
+let mapleader = ','
 
-  " Tab control
-  set expandtab " insert spaces rather than tab for <Tab>
-  set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
-  set tabstop=2 " the visible width of tabs
-  set softtabstop=2 " edit as if the tabs are 4 characters wide
-  set shiftwidth=2 " number of spaces to use for indent and unindent
-  set shiftround " round indent to a multiple of 'shiftwidth'
+" shortcut to save
+nmap <leader>, :w<cr>
 
-  " toggle invisible characters
-  set list
-  set listchars=tab:→\ ,space:⋅,eol:¬,trail:⋅,extends:❯,precedes:❮
-  set showbreak=↪
+nnoremap <leader>al :actionlist<CR>
 
-  " highlight conflicts
-  match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-" }}}
+" Reload .ideavimrc
+nnoremap <space>vs :source ~/.ideavimrc<CR>
 
-" General Mappings {{{
-  " set a map leader for more key combos
-  let mapleader = ','
+" Editor
+nmap <leader>l :action EditorToggleShowWhitespaces<CR>
 
-  " remap esc
-  inoremap jk <esc>
+" clear highlighted search
+noremap <space> :set hlsearch! hlsearch?<CR>
 
-  " shortcut to save
-  nmap <leader>, :w<cr>
+" enable . command in visual mode
+vnoremap . :normal .<CR>
 
-  " set paste toggle
-  set pastetoggle=<leader>v
+nnoremap <leader><space> :%s/\s\+$//e<CR>
 
-  " edit ~/.config/nvim/init.vim
-  map <leader>ev :e ~/.dotfiles/ideavimrc.symlink<cr>
-  " edit gitconfig
-  map <leader>eg :e ~/.gitconfig<cr>
 
-  " Reload .ideavimrc
-  nnoremap <Space>vs :source ~/.ideavimrc<CR>
 
-  " clear highlighted search
-  noremap <space> :set hlsearch! hlsearch?<cr>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Code & Navigation
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  " activate spell-checking alternatives
-  nmap ;s :set invspell spelllang=en<cr>
+nnoremap <leader>k :action LocateInSolutionView<CR>
 
-  " remove extra whitespace
-  nmap <leader><space> :%s/\s\+$<cr>
-  nmap <leader><space><space> :%s/\n\{2,}/\r\r/g<cr>
+nnoremap gcc :action CommentByLineComment<CR>
+nnoremap <leader>f :action ReformatCode<CR>
 
-  inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
-  inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
+map <leader>wc :wq<CR>
 
-  nmap <leader>l :set list!<cr>
+nnoremap <leader>t :action GotoFile<CR>
+nnoremap g/t :action GotoSymbol<CR>
+nnoremap gr :action FindDependentCodeAction<CR>
+nnoremap gD :action GotoDeclaration<CR>
+nnoremap gI :action GotoImplementation<CR>
 
-  " switch between current and last buffer
-  nmap <leader>. <c-^>
+" nnoremap K :action Edit.QuickInfo<cr>
+" nnoremap gk :action Edit.PeekDefinition<cr>
 
-    " Add ;, to EOL (for coding)
-    function! ToggleEndChar(charToMatch)
-        s/\v(.)$/\=submatch(1)==a:charToMatch ? '' : submatch(1).a:charToMatch
-    endfunction
-    " Add semicolor to EOL
-    nnoremap <silent> ;; mz:call ToggleEndChar(';')<CR>`z
-    " Add comma to EOL
-    nnoremap <silent> ;, mz:call ToggleEndChar(',')<CR>`z
 
-  " enable . command in visual mode
-  vnoremap . :normal .<cr>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Surround
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  map <leader>wc :wincmd q<cr>
+" Surround simulating binding
+nnoremap s) ciw(<C-r>")<Esc>
+nnoremap s] ciw[<C-r>"]<Esc>
+nnoremap s} ciw{<C-r>"}<Esc>
+nnoremap s> ciw<lt><C-r>"><Esc>
+nnoremap s" ciw"<C-r>""<Esc>
+nnoremap s' ciw'<C-r>"'<Esc>
+nnoremap sw) ciW(<C-r>")<Esc>
+nnoremap sw] ciW[<C-r>"]<Esc>
+nnoremap sw} ciW{<C-r>"}<Esc>
+nnoremap sw> ciW<lt><C-r>"><Esc>
+nnoremap sw" ciW"<C-r>""<Esc>
+nnoremap sw' ciW'<C-r>"'<Esc>
 
-  " move line mappings
-  " ∆ is <A-j> on macOS
-  " ˚ is <A-k> on macOS
-  nnoremap ∆ :m .+1<cr>==
-  nnoremap ˚ :m .-2<cr>==
-  inoremap ∆ <Esc>:m .+1<cr>==gi
-  inoremap ˚ <Esc>:m .-2<cr>==gi
-  vnoremap ∆ :m '>+1<cr>gv=gv
-  vnoremap ˚ :m '<-2<cr>gv=gv
+" Surround delete binding
+nnoremap ds) vi(dvhp
+nnoremap ds] vi[dvhp
+nnoremap ds} vi{dvhp
+nnoremap ds> vi<dvhp
+nnoremap ds" vi"dvhp
+nnoremap ds' vi'dvhp
 
-  " toggle cursor line
-  nnoremap <leader>i :set cursorline!<cr>
-  set cursorline
+" Surround change binding
+nnoremap cs"' vi"oh<Esc>msvi"l<Esc>cl'<Esc>`scl'<Esc>
+nnoremap cs'" vi'oh<Esc>msvi'l<Esc>cl"<Esc>`scl"<Esc>
 
-  " scroll the viewport faster
-  nnoremap <C-e> 3<C-e>
-  nnoremap <C-y> 3<C-y>
-
-  " moving up and down work as you would expect
-  nnoremap <silent> j gj
-  nnoremap <silent> k gk
-  nnoremap <silent> ^ g^
-  nnoremap <silent> $ g$
-
-  " helpers for dealing with other people's code
-  nmap \t :set ts=4 sts=4 sw=4 noet<cr>
-  nmap \s :set ts=2 sts=2 sw=2 et<cr>>
-
-  command! Rm call functions#Delete()
-  command! RM call functions#Delete() <Bar> q!
-" }}}
+" Surround visual selected text
+vnoremap S" c"<C-r>""<Esc>
+vnoremap S' c"<C-r>"'<Esc>
+vnoremap S) c(<C-r>")<Esc>
+vnoremap S] c[<C-r>"]<Esc>
+vnoremap S} c{<C-r>"}<Esc>
+vnoremap S> c<lt><C-r>"><Esc>
+vnoremap S* c/*<C-r>"*/<Esc>
+"vnoremap St c<lt>div><CR><C-r>"<Esc>
+" Surround in div tag and edit tag
+vnoremap St c<lt>div><CR><C-r>"<Esc>`<lt>lcw
