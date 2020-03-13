@@ -97,15 +97,7 @@ source "$DOTFILES/zsh/prompt.zsh"
 ########################################################
 # Plugin setup
 ########################################################
-
-export ZPLUGDIR="$CACHEDIR/zsh/plugins"
-[[ -d "$ZPLUGDIR" ]] || mkdir -p "$ZPLUGDIR"
-# array containing plugin information (managed by zfetch)
-typeset -A plugins
-
-zfetch $ZPLUGDIR zsh-users/zsh-syntax-highlighting
-zfetch $ZPLUGDIR zsh-users/zsh-autosuggestions
-zfetch $ZPLUGDIR chriskempson/base16-shell
+source "$DOTFILES/zsh/antibody.zsh"
 
 # add fnm
 eval "`fnm env --multi --use-on-cd`"

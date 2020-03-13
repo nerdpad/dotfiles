@@ -44,6 +44,7 @@ brew "yarn"
 brew "youtube-dl"
 brew "z"
 brew "zsh"
+brew "getantibody/tap/antibody"
 
 cask "kitty"
 cask "imageoptim"

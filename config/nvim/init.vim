@@ -122,6 +122,7 @@ call plug#begin('~/.config/nvim/plugged')
     " Load colorschemes
     Plug 'chriskempson/base16-vim'
     Plug 'joshdick/onedark.vim'
+    Plug 'morhetz/gruvbox'
 
     " LightLine {{{
         Plug 'itchyny/lightline.vim'
@@ -317,16 +318,16 @@ call plug#begin('~/.config/nvim/plugged')
 " General Functionality {{{
 	" searching in vim {{{
 		" search inside files using ripgrep. This plugin provides an Ack command.
-		" Plug 'mileszs/ack.vim'
+		Plug 'mileszs/ack.vim'
 		" Plug 'wincent/ferret'
 		" alias and shortcut
 		cnoreabbrev Ack Ack!
 		nnoremap <leader>s :Ack!<space><c-r>=expand("<cword>")<cr>
 
 		" use silver searcher (ag) if available
-		" if executable('ag')
-		"	let g:ackprg = 'ag --vimgrep'
-		" endif
+		if executable('ag')
+		  let g:ackprg = 'ag --vimgrep'
+		endif
 	" }}}
 
 	" better alignment {{{
