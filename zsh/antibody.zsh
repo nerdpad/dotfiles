@@ -8,8 +8,6 @@ zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-history-substring-search
 
-chriskempson/base16-shell
-
 robbyrussell/oh-my-zsh kind:zsh path:lib/git.zsh 
 robbyrussell/oh-my-zsh path:plugins/git
 robbyrussell/oh-my-zsh path:plugins/ssh-agent
