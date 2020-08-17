@@ -11,4 +11,4 @@
   <Namespace>AirWatch.Security.Cryptography</Namespace>
 </Query>
 
-new DataEncryption().DecryptString("awev2:kv0:c8bCFDd2cnttgPce:EHktSlfkstgmiiui0pFMHRk5xdsRrbvTLSeDjY5CAwAKT8o7xNP99aPXNgE7pR+G9+gxsOI=")
+new DataEncryption().DecryptString("awev2:kv0:opjiZp3NrdV617iK:EF7wVAyvJZh+Sf45SC8vrT1vgpBj42R0eajUjmKAHyEUM21o0OWV71P2+jNijbo3Nq6ma8o=")
