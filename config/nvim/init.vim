@@ -71,16 +71,16 @@ call plug#begin('~/.config/nvim/plugged')
     set scrolloff=3 " lines of text around cursor
     set shell=$SHELL
 	
-	" Powershell {{{
-	if has('win32')
-		set shell=powershell
-		set shellxquote=
-		set shellquote=\"
-		set shellcmdflag=\ -NoLogo\ -ExecutionPolicy\ RemoteSigned\ -Command
-		set shellredir=\|\ Out-File\ -Encoding\ UTF8
-	endif
-	" }}}
-	
+    " Powershell {{{
+    if has('win32')
+        set shell=powershell
+        set shellxquote=
+        set shellquote=\"
+        set shellcmdflag=\ -NoLogo\ -ExecutionPolicy\ RemoteSigned\ -Command
+        set shellredir=\|\ Out-File\ -Encoding\ UTF8
+    endif
+    " }}}
+    
     set cmdheight=1 " command bar height
     set title " set terminal title
     set showmatch " show matching braces
