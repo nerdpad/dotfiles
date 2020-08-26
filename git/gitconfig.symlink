@@ -1,9 +1,10 @@
-# gitconfig
-[user]
-	name = Zuhaib Zakaria
-	email = zzakaria@vmware.com
-[github]
-	user = nerdpad
+[init]
+    templatedir = ~/.dotfiles/git/templates
+    defaultBranch = main
+[include]
+    # A local gitconfig, outside of version control.
+    # If the file doesn't exist it is silently ignored
+    path = ~/.gitconfig-local
 [alias]
     # list all aliases
     la = "!git config -l | grep alias | cut -c 7-"
@@ -140,7 +141,7 @@
     compactionHeuristic = true
 	tool = vimdiff
 [difftool]
-	prompt = false
+    prompt = false
 [apply]
     # do not warn about missing whitespace at EOF
     whitespace = nowarn

@@ -4,7 +4,6 @@ Thumbs.db
 *.swp
 .AppleDouble
 .LSOverride
-Icon
 .idea
 coverage_old
 .tern-port

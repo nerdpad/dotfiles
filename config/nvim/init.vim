@@ -1,4 +1,4 @@
-"https://jira-euc.eng.vmware.com/jira/browse/AMST-24781hashivim/vim-hashicorp-toolsjvirtanen/vim-hcl192.168.50.91 .vimrc / init.vim
+" .vimrc / init.vim
 " The following vim/neovim configuration works for both Vim and NeoVim
 
 " ensure vim-plug is installed and then load it
@@ -57,7 +57,7 @@ call plug#begin('~/.config/nvim/plugged')
     set wrap " turn on line wrapping
     set wrapmargin=8 " wrap lines when coming within n characters from side
     set linebreak " set soft wrapping
-    set showbreak=… " show ellipsis at breaking
+    set showbreak=↪
     set autoindent " automatically set indent of new line
     set ttyfast " faster redrawing
     set diffopt+=vertical,iwhite,internal,algorithm:patience,hiddenoff
@@ -94,7 +94,6 @@ call plug#begin('~/.config/nvim/plugged')
     " toggle invisible characters
     set list
     set listchars=tab:→\ ,space:⋅,eol:¬,trail:⋅,extends:❯,precedes:❮
-    set showbreak=↪
 
     set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
     " switch cursor to line when in insert mode, and block when not
@@ -122,7 +121,6 @@ call plug#begin('~/.config/nvim/plugged')
     " Load colorschemes
     Plug 'chriskempson/base16-vim'
     Plug 'joshdick/onedark.vim'
-    Plug 'morhetz/gruvbox'
 
     " LightLine {{{
         Plug 'itchyny/lightline.vim'
@@ -294,6 +292,9 @@ call plug#begin('~/.config/nvim/plugged')
     nmap <leader>4 <Plug>HiInterestingWord4
     nmap <leader>5 <Plug>HiInterestingWord5
     nmap <leader>6 <Plug>HiInterestingWord6
+
+    " open current buffer in a new tab
+    nmap <silent> gTT :tab sb<cr>
 " }}}
 
 " AutoGroups {{{
@@ -371,9 +372,6 @@ call plug#begin('~/.config/nvim/plugged')
 
     " single/multi line code handler: gS - split one line into multiple, gJ - combine multiple lines into one
     Plug 'AndrewRadev/splitjoin.vim'
-
-    " add end, endif, etc. automatically
-    Plug 'tpope/vim-endwise'
 
     " detect indent style (tabs vs. spaces)
     Plug 'tpope/vim-sleuth'
@@ -521,12 +519,21 @@ call plug#begin('~/.config/nvim/plugged')
         \  'down':    '40%'})
 
         command! -bang -nargs=* Find call fzf#vim#grep(
-            \ 'rg --column --line-number --no-heading --follow --color=always '.<q-args>, 1,
+            \ 'rg --column --line-number --no-heading --follow --color=always '.<q-args>.' || true', 1,
             \ <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
         command! -bang -nargs=? -complete=dir Files
             \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
         command! -bang -nargs=? -complete=dir GitFiles
             \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
+        function! RipgrepFzf(query, fullscreen)
+            let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+            let initial_command = printf(command_fmt, shellescape(a:query))
+            let reload_command = printf(command_fmt, '{q}')
+            let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+            call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+        endfunction
+
+        command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
     " }}}
 
     " vim-fugitive {{{
@@ -538,6 +545,7 @@ call plug#begin('~/.config/nvim/plugged')
 
         Plug 'tpope/vim-rhubarb' " hub extension for fugitive
         Plug 'sodapopcan/vim-twiggy'
+        Plug 'rbong/vim-flog'
     " }}}
 
     " ALE {{{
@@ -581,7 +589,7 @@ call plug#begin('~/.config/nvim/plugged')
     " }}}
 
     " coc {{{
-        Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
         let g:coc_global_extensions = [
         \ 'coc-css',
@@ -597,6 +605,7 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'coc-prettier',
         \ 'coc-ultisnips',
         \ 'coc-explorer',
+        \ 'coc-diagnostic',
         \ 'coc-omnisharp'
         \ ]
 
@@ -657,6 +666,18 @@ call plug#begin('~/.config/nvim/plugged')
         let col = col('.') - 1
         return !col || getline('.')[col - 1]  =~# '\s'
         endfunction
+
+        " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+        " position. Coc only does snippet and additional edit on confirm.
+        if exists('*complete_info')
+            inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+        else
+            imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+        endif
+
+        " For enhanced <CR> experience with coc-pairs checkout :h coc#on_enter()
+        inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
     " }}}
 " }}}
 
@@ -744,6 +765,7 @@ call plug#begin('~/.config/nvim/plugged')
     " }}}
 
     Plug 'ekalinin/Dockerfile.vim'
+    Plug 'jparise/vim-graphql'
 
     " Hashicorp files
     Plug 'jvirtanen/vim-hcl', { 'for': ['hcl', 'nomad', 'tf', 'tfvars'] }

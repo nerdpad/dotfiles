@@ -26,6 +26,44 @@
     "explorer.file.column.git.icon.untracked": "?",
     "explorer.file.column.git.icon.modified": "✹",
     "explorer.file.column.git.icon.ignored": "☒",
-    "explorer.openAction.changeDirectory": false,
-    "eslint.enable": false
+    "explorer.openAction.for.directory": "expandOrCollapse",
+    "explorer.previewAction.onHover": false,
+    "explorer.keyMappings": {
+        "<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"]
+    },
+    "eslint.enable": true,
+    "eslint.autoFixOnSave": false,
+    "eslint.autoFix": false,
+    "diagnostic-languageserver.filetypes": {
+        "sh": "shellcheck"
+    },
+    "diagnostic-languageserver.linters": {
+        "shellcheck": {
+            "args": [
+                "--format=gcc",
+                "--external-sources",
+                "-"
+            ],
+            "command": "shellcheck",
+            "debounce": 100,
+            "formatLines": 1,
+            "formatPattern": [
+                "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
+                {
+                    "column": 2,
+                    "line": 1,
+                    "message": 4,
+                    "security": 3
+                }
+            ],
+            "offsetColumn": 0,
+            "offsetLine": 0,
+            "securities": {
+                "error": "error",
+                "note": "warning",
+                "warning": "warning"
+            },
+            "sourceName": "shellcheck"
+        }
+    }
 }
