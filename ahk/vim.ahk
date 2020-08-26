@@ -4,21 +4,21 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; Remaping
-CapsLock::Ctrl
+; CapsLock::Ctrl
 
 ; VIM Keybinding for windows
 $^+h::
-   Send, {Left down}{Left up}
-Return
+    Send, {Left down}{Left up}
+    Return
 
 $^j::
-   Send, {Down down}{Down up}
-Return
+    Send, {Down down}{Down up}
+    Return
 
 $^k::
-   Send, {Up down}{Up up}
-Return
+    Send, {Up down}{Up up}
+    Return
 
 $^+l::
-   Send, {Right down}{Right up}
-Return
+    Send, {Right down}{Right up}
+    Return
