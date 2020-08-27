@@ -121,6 +121,7 @@ call plug#begin('~/.config/nvim/plugged')
     " Load colorschemes
     Plug 'chriskempson/base16-vim'
     Plug 'joshdick/onedark.vim'
+    Plug 'morhetz/gruvbox'
 
     " LightLine {{{
         Plug 'itchyny/lightline.vim'

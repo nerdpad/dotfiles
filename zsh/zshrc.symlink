@@ -118,6 +118,8 @@ zfetch $ZPLUGDIR zsh-users/zsh-autosuggestions
 zfetch $ZPLUGDIR chriskempson/base16-shell
 zfetch $ZPLUGDIR Aloxaf/fzf-tab
 
+source "$DOTFILES/zsh/antibody.zsh"
+
 if [[ -x "$(command -v fnm)" ]]; then
     eval "$(fnm env --multi --use-on-cd)"
     export FNM_LOADED=1
@@ -211,6 +213,7 @@ alias lld="ls -l | grep ^d"
 alias rmf="rm -rf"
 
 # Helpers
+alias cl='clear'
 alias grep='grep --color=auto'
 alias df='df -h' # disk free, in Gigabytes, not bytes
 alias du='du -h -c' # calculate disk usage for a folder
