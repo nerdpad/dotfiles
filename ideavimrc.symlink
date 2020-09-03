@@ -68,12 +68,12 @@ map <leader>wc :wq<CR>
 
 nnoremap <leader>t :action GotoFile<CR>
 nnoremap g/t :action GotoSymbol<CR>
-nnoremap gr :action FindDependentCodeAction<CR>
+nnoremap gr :action ShowUsages<CR>
 nnoremap gD :action GotoDeclaration<CR>
 nnoremap gI :action GotoImplementation<CR>
 
 " nnoremap K :action Edit.QuickInfo<cr>
-" nnoremap gk :action Edit.PeekDefinition<cr>
+nnoremap gk :action QuickImplementations<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
