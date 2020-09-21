@@ -1,0 +1,17 @@
+# start Xserver for shared clipboard
+# "/mnt/c/Program Files/VcXsrv/xlaunch.exe" -run config.xlaunch
+
+# X server fix for clipboard
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export LIBGL_ALWAYS_INDIRECT=true
+
+# alias
+# export python=python3
+# export pip=pip3
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
