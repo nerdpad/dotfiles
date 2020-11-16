@@ -90,3 +90,6 @@ indent_size = 2
 
 [*.{json,resx,csproj,nomad}]
 indent_size=2
+
+[*.vim]
+end_of_line=lf
