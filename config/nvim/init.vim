@@ -399,6 +399,7 @@ call plug#begin('~/.config/nvim/plugged')
         let g:startify_commands = [
         \   { 'up': [ 'Update Plugins', ':PlugUpdate' ] },
         \   { 'ug': [ 'Upgrade Plugin Manager', ':PlugUpgrade' ] },
+        \   { 'uc': [ 'Update CoC Plugins', ':CocUpdate' ] },
         \ ]
 
         let g:startify_bookmarks = [
@@ -637,7 +638,7 @@ call plug#begin('~/.config/nvim/plugged')
         nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
         " rename
-        nmap <silent> <leader>rn <Plug>(coc-rename)
+        nmap <silent> <leader>c <Plug>(coc-rename)
 
         " Remap for format selected region
         xmap <leader>f  <Plug>(coc-format-selected)
@@ -700,8 +701,8 @@ call plug#begin('~/.config/nvim/plugged')
         " pug / jade support
         Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] }
 
-		" nunjucks support
-        Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'njk' }
+        " nunjucks support
+        Plug 'niftylettuce/vim-jinja'
 
         " liquid support
         Plug 'tpope/vim-liquid'
@@ -711,9 +712,9 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'javascript.jsx', 'html' ] }
         " Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'html'] }
         Plug 'moll/vim-node', { 'for': 'javascript' }
-		Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
-		Plug 'MaxMEllon/vim-jsx-pretty'
-		let g:vim_jsx_pretty_highlight_close_tag = 1
+        Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
+        Plug 'MaxMEllon/vim-jsx-pretty'
+        let g:vim_jsx_pretty_highlight_close_tag = 1
     " }}}
 
     " TypeScript {{{
