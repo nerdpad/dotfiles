@@ -63,6 +63,11 @@ fi
 # display how long all tasks over 10 seconds take
 export REPORTTIME=10
 
+# Switching directories for lazy people
+setopt autocd
+# See: http://zsh.sourceforge.net/Intro/intro_6.html
+setopt autopushd pushdminus pushdsilent pushdtohome pushdignoredups
+
 setopt NO_BG_NICE
 setopt NO_HUP
 setopt NO_LIST_BEEP
@@ -121,7 +126,7 @@ zfetch $ZPLUGDIR Aloxaf/fzf-tab
 source "$DOTFILES/zsh/antibody.zsh"
 
 if [[ -x "$(command -v fnm)" ]]; then
-    eval "$(fnm env --multi --use-on-cd)"
+    eval "$(fnm env --use-on-cd)"
     export FNM_LOADED=1
 fi
 

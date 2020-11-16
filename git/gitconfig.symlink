@@ -150,6 +150,7 @@
     pager = less -FXRS -x2
     editor = vim
     whitespace = cr-at-eol
+	autocrlf = true
 [rerere]
     enabled = true
 [grep]
@@ -168,3 +169,11 @@
 [pager]
     diff = "diff-so-fancy | less --tabs=4 -RFX"
     show = "diff-so-fancy | less --tabs=4 -RFX"
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[user]
+	name = Zuhaib Zakaria
+	email = zzakaria@vmware.com
