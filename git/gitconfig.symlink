@@ -153,7 +153,6 @@
     pager = less -FXRS -x2
     editor = vim
     whitespace = cr-at-eol
-	autocrlf = true
 [rerere]
     enabled = true
 [grep]
