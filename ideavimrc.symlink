@@ -2,12 +2,31 @@
 " Find IDE actions by name pattern:
 "	:actionlist [pattern]
 
+" set a map leader for more key combo
+let mapleader = ','
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set ideajoin
 set number
+
+set visualbell
+set noerrorbells
+
+# vim plugins
+set easymotion
+set surround
+set multiple-cursors
+set argtextob
+set exchange
+set textobj-entire
+set highlightedyank
+set commentary
+" Commentary is bugged: https://youtrack.jetbrains.com/issue/RIDER-38359
+nmap gcc :action CommentByLineComment<CR>
+vmap gc :action CommentByLineComment<CR>
 
 " Searching
 set ignorecase " case insensitive searching
@@ -21,21 +40,25 @@ set clipboard=unnamed
 set scrolloff=5
 
 set showmode
-set surround
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mapping
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" delete without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" replace currently selected text with default register
+" without yanking it
+vnoremap p "_dP
+
 " remap ESC
 inoremap jk <Esc>
 vnoremap jk <Esc>
 
-" set a map leader for more key combo
-let mapleader = ','
-
 " shortcut to save
-nmap <leader>, :w<cr>
+nmap ;; :w<cr>
 
 nnoremap <leader>al :actionlist<CR>
 
@@ -53,16 +76,16 @@ vnoremap . :normal .<CR>
 
 nnoremap <leader><space> :%s/\s\+$//e<CR>
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Code & Navigation
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 nnoremap <leader>k :action LocateInSolutionView<CR>
-
-nnoremap gcc :action CommentByLineComment<CR>
 nnoremap <leader>f :action ReformatCode<CR>
+
+nnoremap <leader>r :action RenameElement<CR>
+nnoremap <leader>R :action Refactorings.QuickListPopupAction<CR>
+" nnoremap <leader>r :action RefactoringMenu<CR>
 
 map <leader>wc :wq<CR>
 
@@ -74,46 +97,3 @@ nnoremap gI :action GotoImplementation<CR>
 
 " nnoremap K :action Edit.QuickInfo<cr>
 nnoremap gk :action QuickImplementations<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Surround
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Surround simulating binding
-nnoremap s) ciw(<C-r>")<Esc>
-nnoremap s] ciw[<C-r>"]<Esc>
-nnoremap s} ciw{<C-r>"}<Esc>
-nnoremap s> ciw<lt><C-r>"><Esc>
-nnoremap s" ciw"<C-r>""<Esc>
-nnoremap s' ciw'<C-r>"'<Esc>
-nnoremap sw) ciW(<C-r>")<Esc>
-nnoremap sw] ciW[<C-r>"]<Esc>
-nnoremap sw} ciW{<C-r>"}<Esc>
-nnoremap sw> ciW<lt><C-r>"><Esc>
-nnoremap sw" ciW"<C-r>""<Esc>
-nnoremap sw' ciW'<C-r>"'<Esc>
-
-" Surround delete binding
-nnoremap ds) vi(dvhp
-nnoremap ds] vi[dvhp
-nnoremap ds} vi{dvhp
-nnoremap ds> vi<dvhp
-nnoremap ds" vi"dvhp
-nnoremap ds' vi'dvhp
-
-" Surround change binding
-nnoremap cs"' vi"oh<Esc>msvi"l<Esc>cl'<Esc>`scl'<Esc>
-nnoremap cs'" vi'oh<Esc>msvi'l<Esc>cl"<Esc>`scl"<Esc>
-
-" Surround visual selected text
-vnoremap S" c"<C-r>""<Esc>
-vnoremap S' c"<C-r>"'<Esc>
-vnoremap S) c(<C-r>")<Esc>
-vnoremap S] c[<C-r>"]<Esc>
-vnoremap S} c{<C-r>"}<Esc>
-vnoremap S> c<lt><C-r>"><Esc>
-vnoremap S* c/*<C-r>"*/<Esc>
-"vnoremap St c<lt>div><CR><C-r>"<Esc>
-" Surround in div tag and edit tag
-vnoremap St c<lt>div><CR><C-r>"<Esc>`<lt>lcw
