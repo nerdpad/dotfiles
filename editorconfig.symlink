@@ -45,7 +45,7 @@ operator_position           = preserve-newline
 # Use tabs for indentation (Makefiles require tabs)
 indent_style = tab
 
-[*.{sql,cake}]
+[*.{sql,cake,feature}]
 indent_style = tab
 
 [*.cs]
@@ -93,3 +93,7 @@ indent_size=2
 
 [*.vim]
 end_of_line=lf
+
+# ruby
+[*.rb]
+indent_size = 2
