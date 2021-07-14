@@ -26,6 +26,7 @@ if OS.mac?
     # cask "audio-hijack"
     cask "paw"
     cask "postman"
+    cask "rectangle"
 
     # Browsers
     cask "firefox"
