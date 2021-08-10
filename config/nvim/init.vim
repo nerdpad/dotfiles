@@ -17,11 +17,19 @@ call plug#begin('~/.config/nvim/plugged')
 
     set autoread " detect when a file is changed
 
-    set history=1000 " change history to 1000
-    set textwidth=120
+    " WARNING: These settings disable vim's backups (swap files).
+    " If this is not desired, comment these lines out.
+    set nobackup " don't use backup files
+    set nowritebackup " don't backup the file while editing
+    set noswapfile " Don't create swapfiles for new buffers
+    set updatecount=0 " don't try to write swap files after some number of updates
 
-    set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+    set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp " change where swap files are stored"
     set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+    set history=1000 " store the last 1000 command-lines entered
+
+    set textwidth=120
 
     if (has('nvim'))
         " show results of substition as they're happening
@@ -30,7 +38,7 @@ call plug#begin('~/.config/nvim/plugged')
     endif
 
     set backspace=indent,eol,start " make backspace behave in a sane manner
-    set clipboard=unnamed
+    set clipboard=unnamed,unnamedplus
 
     if has('mouse')
         set mouse=a
@@ -75,7 +83,7 @@ call plug#begin('~/.config/nvim/plugged')
     set mat=2 " how many tenths of a second to blink
     set updatetime=300
     set signcolumn=yes
-    set shortmess+=c
+    set shortmess-=S " Show [X/X] search results
 
     " Tab control
     set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
@@ -152,13 +160,16 @@ call plug#begin('~/.config/nvim/plugged')
             \       'currentfunction': 'helpers#lightline#currentFunction',
             \       'gitblame': 'helpers#lightline#gitBlame'
             \   },
+            \   'tab_component_function': {
+            \       'filetype': 'helpers#lightline#tabFileType'
+            \   },
             \   'tabline': {
             \       'left': [ [ 'tabs' ] ],
             \       'right': [ [ 'close' ] ]
             \   },
             \   'tab': {
-            \       'active': [ 'filename', 'modified' ],
-            \       'inactive': [ 'filename', 'modified' ],
+            \       'active': [ 'filetype', 'filename', 'modified' ],
+            \       'inactive': [ 'filetype', 'filename', 'modified' ],
             \   },
             \   'separator': { 'left': '', 'right': '' },
             \   'subseparator': { 'left': '', 'right': '' }
@@ -247,10 +258,10 @@ call plug#begin('~/.config/nvim/plugged')
     nnoremap <C-y> 3<C-y>
 
     " moving up and down work as you would expect
-    nnoremap <silent> j gj
-    nnoremap <silent> k gk
-    nnoremap <silent> ^ g^
-    nnoremap <silent> $ g$
+    nnoremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+    nnoremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+    nnoremap <silent> <expr> ^ (v:count == 0 ? 'g^' :  '^')
+    nnoremap <silent> <expr> $ (v:count == 0 ? 'g$' : '$')
 
     " helpers for dealing with other people's code
     nmap \t :set ts=4 sts=4 sw=4 noet<cr>
@@ -389,7 +400,6 @@ call plug#begin('~/.config/nvim/plugged')
     " FZF {{{
         Plug $HOMEBREW_PREFIX . '/opt/fzf'
         Plug 'junegunn/fzf.vim'
-        let g:fzf_layout = { 'down': '~25%' }
 
         if isdirectory(".git")
             " if in a git project, use :GFiles
@@ -432,9 +442,9 @@ call plug#begin('~/.config/nvim/plugged')
             \ 'rg --column --line-number --no-heading --follow --color=always '.<q-args>.' || true', 1,
             \ <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
         command! -bang -nargs=? -complete=dir Files
-            \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
+            \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
         command! -bang -nargs=? -complete=dir GitFiles
-            \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
+            \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
         function! RipgrepFzf(query, fullscreen)
             let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
             let initial_command = printf(command_fmt, shellescape(a:query))
@@ -443,7 +453,32 @@ call plug#begin('~/.config/nvim/plugged')
             call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
         endfunction
 
-        command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+        function! FloatingFZF()
+            let buf = nvim_create_buf(v:true, v:true)
+            let height = float2nr(&lines * 0.5)
+            let width = float2nr(&columns * 0.7)
+            let horizontal = float2nr((&columns - width) / 2)
+            let vertical = 0
+            let opts = {
+                \ 'relative': 'editor',
+                \ 'row': vertical,
+                \ 'col': horizontal,
+                \ 'width': width,
+                \ 'height': height,
+                \ 'style': 'minimal'
+            \ }
+            call nvim_open_win(buf, v:true, opts)
+        endfunction
+
+        let $FZF_DEFAULT_OPTS= $FZF_DEFAULT_OPTS
+            \ . " --layout reverse"
+            \ . " --pointer ' '"
+            \ . " --info hidden"
+            \ . " --color 'bg+:0'"
+            \ . " --border rounded"
+
+        let g:fzf_preview_window = ['right:50%:hidden', '?']
+        let g:fzf_layout = { 'window': 'call FloatingFZF()' }
     " }}}
 
     " vim-fugitive {{{
@@ -451,7 +486,7 @@ call plug#begin('~/.config/nvim/plugged')
         nmap <silent> <leader>gs :Gstatus<cr>
         nmap <leader>ge :Gedit<cr>
         nmap <silent><leader>gr :Gread<cr>
-        nmap <silent><leader>gb :Gblame<cr>
+        nmap <silent><leader>gb :G blame<cr>
 
         Plug 'tpope/vim-rhubarb' " hub extension for fugitive
         Plug 'sodapopcan/vim-twiggy'
@@ -482,7 +517,8 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'coc-prettier',
         \ 'coc-ultisnips',
         \ 'coc-explorer',
-        \ 'coc-diagnostic'
+        \ 'coc-diagnostic',
+        \ 'coc-highlight'
         \ ]
 
         autocmd CursorHold * silent call CocActionAsync('highlight')
