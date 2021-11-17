@@ -134,6 +134,7 @@ zfetch zsh-users/zsh-syntax-highlighting
 zfetch zsh-users/zsh-autosuggestions
 zfetch chriskempson/base16-shell
 zfetch Aloxaf/fzf-tab
+zfetch b4b4r07/cli-finder
 
 source "$DOTFILES/zsh/antibody.zsh"
 
