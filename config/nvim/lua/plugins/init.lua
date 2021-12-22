@@ -117,7 +117,7 @@ cmd [[Plug 'nvim-lua/plenary.nvim']]
 cmd [[Plug 'kyazdani42/nvim-tree.lua']]
 cmd [[Plug 'lewis6991/gitsigns.nvim']]
 cmd [[Plug 'neovim/nvim-lspconfig']]
-cmd [[Plug 'kabouzeid/nvim-lspinstall']]
+cmd [[Plug 'williamboman/nvim-lsp-installer']]
 cmd [[Plug 'hrsh7th/cmp-nvim-lsp']]
 cmd [[Plug 'hrsh7th/cmp-nvim-lua']]
 cmd [[Plug 'hrsh7th/cmp-buffer']]
@@ -135,6 +135,8 @@ cmd [[Plug 'mhartington/formatter.nvim']]
 cmd [[Plug 'alvarosevilla95/luatab.nvim']]
 cmd [[Plug 'SmiteshP/nvim-gps']]
 cmd [[Plug 'github/copilot.vim']]
+cmd [[Plug 'nvim-telescope/telescope.nvim']]
+cmd [[Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }]]
 
 -- fzf
 cmd [[Plug $HOMEBREW_PREFIX . '/opt/fzf']]
@@ -146,6 +148,7 @@ plugEnd()
 
 require("nvim-autopairs").setup()
 require("colorizer").setup()
+require("plugins.telescope")
 require("plugins.gitsigns")
 require("plugins.trouble")
 require("plugins.fzf")

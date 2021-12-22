@@ -5,9 +5,11 @@ local cmd = vim.cmd
 local api = vim.api
 local fn = vim.fn
 local lsp = vim.lsp
-local lspinstall = require("lspinstall")
+local lsp_installer = require("nvim-lsp-installer")
 local nvim_lsp = require("lspconfig")
-local colors = require("colors")
+local theme = require("theme")
+local colors = theme.colors
+local icons = theme.icons
 
 cmd("autocmd ColorScheme * highlight NormalFloat guibg=" .. colors.bg)
 cmd("autocmd ColorScheme * highlight FloatBorder guifg=white guibg=" .. colors.bg)
@@ -116,43 +118,10 @@ end
 
 local diagnosticls_settings = {
   filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescriptreact",
-    "typescript.tsx",
-    "html",
-    "css",
     "sh"
   },
   init_options = {
     linters = {
-      eslint = {
-        sourceName = "eslint",
-        command = "eslint_d",
-        rootPatterns = {
-          ".git",
-          ".eslintrc",
-          ".eslintrc.json",
-          ".eslintrc.js",
-          ".eslintrc.yml",
-          ".eslintrc.yaml",
-          "package.json"
-        },
-        debounce = 100,
-        args = {"-f", "unix", "--stdin", "--stdin-filename", "%filepath", "--format", "json"},
-        securities = {["1"] = "warning", ["2"] = "error"},
-        parseJson = {
-          errorsRoot = "[0].messages",
-          line = "line",
-          column = "column",
-          endLine = "endLine",
-          endColumn = "endColumn",
-          security = "severity",
-          message = "${message} [${ruleId}]"
-        }
-      },
       shellcheck = {
         sourceName = "shellcheck",
         command = "shellcheck",
@@ -168,32 +137,8 @@ local diagnosticls_settings = {
         securities = {error = "error", warning = "warning", note = "info"}
       }
     },
-    formatters = {
-      prettier = {
-        command = "./node_modules/.bin/prettier",
-        args = {"--stdin-filepath", "%filepath"},
-        rootPatterns = {
-          ".git",
-          ".eslintrc.json",
-          ".eslintrc",
-          ".eslinrc.js",
-          "package.json",
-          ".prettierrc"
-        }
-      }
-    },
     filetypes = {
-      sh = "shellcheck",
-      javascript = "eslint",
-      javascriptreact = "eslint",
-      ["javascript.jsx"] = "eslint",
-      typescript = "eslint",
-      typescriptreact = "eslint",
-      ["typescript.tsx"] = "eslint"
-    },
-    formatFiletypes = {
-      javascript = "eslint_d",
-      typescript = "eslint_d"
+      sh = "shellcheck"
     }
   }
 }
@@ -237,57 +182,45 @@ local function make_config()
   }
 end
 
--- lsp-install
-local function setup_servers()
-  lspinstall.setup()
-
-  -- get all installed servers
-  local servers = lspinstall.installed_servers()
-
-  for _, server in pairs(servers) do
-    local config = make_config()
-
-    if server == "lua" then
-      config.settings = lua_settings
-      config.root_dir = function(fname)
+lsp_installer.on_server_ready(
+  function(server)
+    local opts = make_config()
+    if server.name == "lua" then
+      opts.settings = lua_settings
+      opts.root_dir = function(fname)
         local util = require("lspconfig/util")
         return util.find_git_ancestor(fname) or util.path.dirname(fname)
       end
-    elseif server == "vim" then
-      config.init_options = {isNeovim = true}
-    elseif server == "diagnosticls" then
-      config = diagnosticls_settings
-    elseif server == "tsserver" then
-      local capabilities = config.capabilities
-      config.capabiltiies = require("cmp_nvim_lsp").update_capabilities(capabilities)
+    elseif server.name == "vim" then
+      opts.init_options = {isNeovim = true}
+    elseif server.name == "diagnosticls" then
+      opts = diagnosticls_settings
+    elseif server.name == "tsserver" then
+      local capabilities = opts.capabilities
+      opts.capabiltiies = require("cmp_nvim_lsp").update_capabilities(capabilities)
+      opts.root_dir = nvim_lsp.util.root_pattern("package.json")
+    elseif server.name == "denols" then
+      opts.root_dir = nvim_lsp.util.root_pattern("deno.json")
+      opts.init_options = {
+        lint = true
+      }
     end
 
-    nvim_lsp[server].setup(config)
+    server:setup(opts)
   end
-end
-
--- install these servers by default
-local function install_servers()
-  local required_servers = {"lua", "typescript", "bash", "diagnosticls"}
-  local installed_servers = lspinstall.installed_servers()
-  for _, server in pairs(required_servers) do
-    if not vim.tbl_contains(installed_servers, server) then
-      lspinstall.install_server(server)
-    end
-  end
-end
-
-install_servers()
-setup_servers()
-
-lspinstall.post_install_hook = function()
-  setup_servers()
-  cmd [[bufdo e]]
-end
+)
 
 -- set up custom symbols for LSP errors
-local signs = {Error = " ", Warning = " ", Warn = " ", Hint = " ", Information = " "}
+local signs = {Error = icons.error, Warning = icons.warning, Warn = icons.warning, Hint = icons.hint, Info = icons.hint}
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, {text = icon, texthl = hl})
 end
+
+-- Set colors for completion items
+cmd("highlight! CmpItemAbbrMatch guibg=NONE guifg=" .. colors.lightblue)
+cmd("highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=" .. colors.lightblue)
+cmd("highlight! CmpItemKindFunction guibg=NONE guifg=" .. colors.magenta)
+cmd("highlight! CmpItemKindMethod guibg=NONE guifg=" .. colors.magenta)
+cmd("highlight! CmpItemKindVariable guibg=NONE guifg=" .. colors.blue)
+cmd("highlight! CmpItemKindKeyword guibg=NONE guifg=" .. colors.fg)

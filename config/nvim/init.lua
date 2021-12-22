@@ -18,7 +18,7 @@ local omap = utils.omap
 local nnoremap = utils.nnoremap
 local inoremap = utils.inoremap
 local vnoremap = utils.vnoremap
-local colors = require("colors")
+local colors = require("theme").colors
 
 -- create a completion_nvim table on _G which is visible via
 -- v:lua from vimscript
@@ -242,9 +242,6 @@ if fn.filereadable(fn.expand("~/.vimrc_background")) then
   g.base16colorspace = 256
   cmd [[source ~/.vimrc_background]]
 end
-
-cmd [[syntax on]]
-cmd [[filetype plugin indent on]]
 
 cmd [[syntax on]]
 cmd [[filetype plugin indent on]]
