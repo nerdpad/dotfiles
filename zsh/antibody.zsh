@@ -13,4 +13,6 @@ robbyrussell/oh-my-zsh path:plugins/git
 robbyrussell/oh-my-zsh path:plugins/ssh-agent
 robbyrussell/oh-my-zsh path:plugins/vi-mode
 
+b4b4r07/cli-finder
+
 "
