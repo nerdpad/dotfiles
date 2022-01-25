@@ -123,6 +123,10 @@ zfetch Aloxaf/fzf-tab
 
 source "$DOTFILES/zsh/antibody.zsh"
 
+source "$DOTFILES/zsh/antibody.zsh"
+
+source "$DOTFILES/zsh/antibody.zsh"
+
 if [[ -x "$(command -v fnm)" ]]; then
     eval "$(fnm env --use-on-cd)"
 fi
