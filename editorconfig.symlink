@@ -97,3 +97,6 @@ end_of_line=lf
 # ruby
 [*.rb]
 indent_size = 2
+
+[Vagrantfile]
+indent_size = 2
