@@ -51,6 +51,7 @@ nvimtree.setup {
   disable_netrw = false,
   hijack_netrw = true,
   auto_close = false,
+  open_on_tab = true,
   diagnostics = {
     enable = false
   },
