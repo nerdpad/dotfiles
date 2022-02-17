@@ -98,5 +98,11 @@ end_of_line=lf
 [*.rb]
 indent_size = 2
 
+# java
+
+# Xml build files
+[*.java]
+indent_size = 4
+
 [Vagrantfile]
 indent_size = 2
