@@ -197,6 +197,10 @@ Plug("nvim-telescope/telescope-fzf-native.nvim", {["do"] = "make"})
 
 Plug "folke/trouble.nvim"
 
+Plug "navarasu/onedark.nvim"
+Plug("catppuccin/nvim", {["as"] = "catppuccin"})
+Plug "b0o/incline.nvim"
+
 Plug("fatih/vim-go", {["do"] = ":GoUpdateBinaries"})
 
 Plug "jlcrochet/vim-cs"
@@ -218,5 +222,13 @@ require("plugins.treesitter")
 require("plugins.nvimtree")
 require("plugins.formatter")
 require("plugins.tabline")
-require("plugins.feline")
+require("plugins.catppuccin")
 require("plugins.startup")
+require("incline").setup {
+  hide = {
+    cursorline = false,
+    focused_win = false,
+    only_win = true
+  }
+}
+-- require("plugins.onedark")
