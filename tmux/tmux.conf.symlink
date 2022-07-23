@@ -40,6 +40,7 @@ bind = select-layout tiled
 set -g base-index 1
 setw -g pane-base-index 1
 
+set-option -g focus-events on
 set-option -g set-titles on
 set-option -g set-titles-string "#T - #W"
 set-window-option -g automatic-rename on
@@ -98,4 +99,4 @@ if-shell '[[ $(uname -s) = Linux ]]' {
     bind C-v run 'tmux set-buffer "$(xclip -o -sel clipboard)"; tmux paste-buffer'
 }
 
-source-file "~/code/dotfiles/tmux/themes/catpuccin.conf"
+source-file "$DOTFILES/tmux/themes/bubbles.conf"

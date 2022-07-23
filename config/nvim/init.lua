@@ -107,7 +107,7 @@ table.insert(opt.diffopt, "iwhite")
 table.insert(opt.diffopt, "internal")
 table.insert(opt.diffopt, "algorithm:patience")
 table.insert(opt.diffopt, "hiddenoff")
-opt.laststatus = 2 -- show the status line all the time
+opt.laststatus = 3 -- show the global statusline all the time
 opt.scrolloff = 7 -- set 7 lines to the cursors - when moving vertical
 opt.wildmenu = true -- enhanced command line completion
 opt.hidden = true -- current buffer can be put into background
@@ -115,7 +115,7 @@ opt.showcmd = true -- show incomplete commands
 opt.showmode = true -- don't show which mode disabled for PowerLine
 opt.wildmode = {"list", "longest"} -- complete files like a shell
 opt.shell = env.SHELL
-opt.cmdheight = 1 -- command bar height
+opt.cmdheight = 0 -- hide command bar when not used
 opt.title = true -- set terminal title
 opt.showmatch = true -- show matching braces
 opt.mat = 2 -- how many tenths of a second to blink
@@ -131,8 +131,8 @@ opt.shiftwidth = 4 -- number of spaces to use for indent and unindent
 opt.shiftround = true -- round indent to a multiple of 'shiftwidth'
 
 -- code folding settings
-cmd [[set foldmethod=expr]] -- use treesitter folding support
-cmd [[set foldexpr=nvim_treesitter#foldexpr()]]
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevelstart = 99
 opt.foldnestmax = 10 -- deepest fold is 10 levels
 opt.foldenable = false -- don't fold by default
@@ -147,6 +147,9 @@ opt.listchars = {
   extends = "❯",
   precedes = "❮"
 }
+
+-- hide the ~ character on empty lines at the end of the buffer
+opt.fcs = "eob: "
 
 -- Mappings
 g.mapleader = ","
@@ -238,7 +241,7 @@ nmap("gTT", ":tab sb<cr>")
 
 require("plugins")
 
-if fn.filereadable(fn.expand("~/.vimrc_background")) then
+if utils.file_exists(fn.expand("~/.vimrc_background")) then
   g.base16colorspace = 256
   cmd [[source ~/.vimrc_background]]
 end

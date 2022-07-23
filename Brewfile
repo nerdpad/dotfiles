@@ -9,6 +9,7 @@ if OS.mac?
     # Applications
     cask "kitty" # a better terminal emulator
     cask "imageoptim" # a tool to optimize images
+	cask "1password/tap/1password-cli"
 
     # Fonts
     cask "font-fira-code"
@@ -38,7 +39,7 @@ brew "htop" # a top alternative
 brew "jq" # work with JSON files in shell scripts
 brew "neofetch" # pretty system info
 brew "neovim" # A better vim
-brew "python" # python (latst)
+brew "python" # python (latest)
 brew "ripgrep" # very fast file searcher
 brew "fnm" # Fast Node version manager
 brew "shellcheck" # diagnostics for shell sripts
