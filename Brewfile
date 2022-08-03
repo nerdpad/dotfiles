@@ -5,11 +5,12 @@ if OS.mac?
 
     brew "noti" # utility to display notifications from scripts
     brew "trash" # rm, but put in the trash rather than completely delete
+    brew "lastpass-cli"
 
     # Applications
     cask "kitty" # a better terminal emulator
     cask "imageoptim" # a tool to optimize images
-	cask "1password/tap/1password-cli"
+	# cask "1password/tap/1password-cli"
 
     # Fonts
     cask "font-fira-code"

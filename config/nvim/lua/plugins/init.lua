@@ -77,6 +77,9 @@ Plug "itchyny/vim-qfedit"
 -- liquid support
 Plug "tpope/vim-liquid"
 
+-- python
+Plug("python-mode/python-mode", {["for"] = "python", ['branch'] = 'develop'})
+
 Plug("othree/yajs.vim", {["for"] = {"javascript", "javascript.jsx", "html"}})
 -- Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'html'] }
 Plug("moll/vim-node", {["for"] = "javascript"})
