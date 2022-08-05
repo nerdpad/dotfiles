@@ -40,7 +40,7 @@ brew "htop" # a top alternative
 brew "jq" # work with JSON files in shell scripts
 brew "neofetch" # pretty system info
 brew "neovim" # A better vim
-brew "python" # python (latest)
+# brew "python" # python (latest)
 brew "ripgrep" # very fast file searcher
 brew "fnm" # Fast Node version manager
 brew "shellcheck" # diagnostics for shell sripts

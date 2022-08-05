@@ -161,6 +161,18 @@ setup_shell() {
     fi
 }
 
+setup_pyenv() {
+    title "Configuring pyenv"
+
+    if test ! "$(command -v pyenv)"; then
+        info "installing pyenv"
+        brew install pyenv
+        info "installing latest python"
+        pyenv install 3.10:6
+        pyenv global 3.10.6
+    fi
+}
+
 function setup_terminfo() {
     title "Configuring terminfo"
 
@@ -247,6 +259,9 @@ case "$1" in
     terminfo)
         setup_terminfo
         ;;
+    pyenv)
+        setup_pyenv
+        ;;
     macos)
         setup_macos
         ;;
@@ -256,6 +271,7 @@ case "$1" in
         setup_homebrew
         setup_shell
         setup_git
+        setup_pyenv
         setup_macos
         ;;
     *)
