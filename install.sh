@@ -259,11 +259,11 @@ case "$1" in
     terminfo)
         setup_terminfo
         ;;
-    pyenv)
-        setup_pyenv
-        ;;
     macos)
         setup_macos
+        ;;
+    pyenv)
+        setup_pyenv
         ;;
     all)
         setup_symlinks
