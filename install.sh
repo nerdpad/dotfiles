@@ -165,8 +165,6 @@ setup_pyenv() {
     title "Configuring pyenv"
 
     if test ! "$(command -v pyenv)"; then
-        info "installing pyenv"
-        brew install pyenv
         info "installing latest python"
         pyenv install 3.10:6
         pyenv global 3.10.6
