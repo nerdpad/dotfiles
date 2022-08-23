@@ -197,6 +197,8 @@ Plug("nvim-telescope/telescope-fzf-native.nvim", {["do"] = "make"})
 
 Plug "folke/trouble.nvim"
 
+Plug("fatih/vim-go", {["do"] = ":GoUpdateBinaries"})
+
 plugEnd()
 
 -- Once the plugins have been loaded, Lua-based plugins need to be required and started up
