@@ -200,7 +200,6 @@ Plug("nvim-telescope/telescope-fzf-native.nvim", {["do"] = "make"})
 
 Plug "folke/trouble.nvim"
 
-Plug "navarasu/onedark.nvim"
 Plug("catppuccin/nvim", {["as"] = "catppuccin"})
 Plug "b0o/incline.nvim"
 
@@ -234,4 +233,3 @@ require("incline").setup {
     only_win = true
   }
 }
--- require("plugins.onedark")
