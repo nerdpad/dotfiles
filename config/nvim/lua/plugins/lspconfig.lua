@@ -190,7 +190,7 @@ local function make_config(callback)
     }
   }
   capabilities.textDocument.colorProvider = {dynamicRegistration = false}
-  capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
   return callback(
     {
@@ -217,6 +217,23 @@ lsp_installer.setup(
   }
 )
 
+lspconfig.rust_analyzer.setup(
+  make_config(
+    function(config)
+      return config
+    end
+  )
+)
+
+lspconfig.eslint.setup(
+  make_config(
+    function(config)
+      config.filetypes = {"javascript", "javascriptreact", "typescript", "typescriptreact"}
+      return config
+    end
+  )
+)
+
 lspconfig.tsserver.setup(
   make_config(
     function(config)
@@ -238,6 +255,7 @@ lspconfig.tsserver.setup(
 lspconfig.denols.setup(
   make_config(
     function(config)
+      config.single_file_support = false
       config.root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
       config.init_options = {
         lint = true

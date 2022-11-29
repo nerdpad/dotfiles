@@ -65,7 +65,7 @@ telescope.setup(
     },
     pickers = {
       find_files = {
-        find_command = {"fd", "--type", "f", "--strip-cwd-prefix"}
+        find_command = {"fd", "--type", "f", "--hidden", "--strip-cwd-prefix"}
       }
     },
     extensions = {
@@ -80,12 +80,15 @@ telescope.setup(
 )
 
 telescope.load_extension("fzf")
+telescope.load_extension("node_modules")
 
 -- mappings
 nnoremap("<leader>ff", "<cmd>Telescope find_files<cr>")
+nnoremap("<leader>t", "<cmd>Telescope find_files<cr>")
 nnoremap("<leader>fo", "<cmd>Telescope oldfiles<cr>")
 nnoremap("<leader>fn", "<cmd>Telescope node_modules list<cr>")
 nnoremap("<leader>fg", "<cmd>Telescope live_grep<cr>")
 nnoremap("<leader>fr", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>")
 nnoremap("<leader>fb", "<cmd>Telescope buffers<cr>")
+nnoremap("<leader>r", "<cmd>Telescope buffers<cr>")
 nnoremap("<leader>fh", "<cmd>Telescope help_tags<cr>")

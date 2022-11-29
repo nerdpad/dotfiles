@@ -71,6 +71,12 @@ nvimtree.setup {
   },
   view = {
     width = 40,
-    side = "left"
+    side = "left",
+    mappings = {
+      list = {
+        -- release <C-e> for scrolling
+        {key = "<C-e>", action = ""}
+      }
+    }
   }
 }

@@ -70,6 +70,7 @@ Plug("digitaltoad/vim-pug", {["for"] = {"jade", "pug"}})
 
 -- nunjucks support
 -- Plug "niftylettuce/vim-jinja"
+Plug "Glench/Vim-Jinja2-Syntax"
 
 -- edit quickfix list
 Plug "itchyny/vim-qfedit"
@@ -88,6 +89,7 @@ g.vim_jsx_pretty_highlight_close_tag = 1
 Plug("leafgarland/typescript-vim", {["for"] = {"typescript", "typescript.tsx"}})
 
 Plug("wavded/vim-stylus", {["for"] = {"stylus", "markdown"}})
+Plug "jxnblk/vim-mdx-js"
 Plug("groenewege/vim-less", {["for"] = "less"})
 Plug("hail2u/vim-css3-syntax", {["for"] = "css"})
 Plug("cakebaker/scss-syntax.vim", {["for"] = "scss"})
@@ -185,6 +187,7 @@ Plug "stevearc/dressing.nvim"
 -- Navigate a code base with a really slick UI
 Plug "nvim-telescope/telescope.nvim"
 Plug "nvim-telescope/telescope-rg.nvim"
+Plug "nvim-telescope/telescope-node-modules.nvim"
 
 -- Startup screen for Neovim
 Plug "startup-nvim/startup.nvim"
@@ -196,6 +199,9 @@ Plug "junegunn/fzf.vim"
 Plug("nvim-telescope/telescope-fzf-native.nvim", {["do"] = "make"})
 
 Plug "folke/trouble.nvim"
+
+Plug("catppuccin/nvim", {["as"] = "catppuccin"})
+Plug "b0o/incline.nvim"
 
 Plug("fatih/vim-go", {["do"] = ":GoUpdateBinaries"})
 
@@ -218,5 +224,12 @@ require("plugins.treesitter")
 require("plugins.nvimtree")
 require("plugins.formatter")
 require("plugins.tabline")
-require("plugins.feline")
+require("plugins.catppuccin")
 require("plugins.startup")
+require("incline").setup {
+  hide = {
+    cursorline = false,
+    focused_win = false,
+    only_win = true
+  }
+}
