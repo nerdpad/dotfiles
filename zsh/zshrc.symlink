@@ -230,3 +230,28 @@ source "$DOTFILES/zsh/prompt.zsh"
 if [[ -a ~/.localrc ]]; then
     source ~/.localrc
 fi
+
+# tmux UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+
+# jenv
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+# nvm
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+# pyenv
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# go
+export GOPATH=$HOME/go
+export GOBIN=$HOME/go/bin
+export GOROOT=/opt/homebrew/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin

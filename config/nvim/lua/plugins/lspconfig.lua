@@ -207,7 +207,8 @@ lsp_installer.setup(
       "tsserver",
       "sumneko_lua",
       "denols",
-      "vimls"
+      "vimls",
+      "csharp"
     },
     automatic_installation = true,
     ui = {
@@ -273,6 +274,34 @@ lspconfig.diagnosticls.setup(
   make_config(
     function(config)
       config.settings = diagnosticls_settings
+      return config
+    end
+  )
+)
+
+lspconfig.gopls.setup(
+  make_config(
+    function(config)
+      config.cmd = {"gopls", "serve"}
+      config.filetypes = {"go", "gomod"}
+      config.root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git")
+      config.settings = {
+        gpls = {
+          analyses = {
+            unusedparams = true,
+          },
+          staticcheck = true,
+        },
+      }
+
+      return config
+    end
+  )
+)
+
+lspconfig.omnisharp.setup(
+  make_config(
+    function(config)
       return config
     end
   )

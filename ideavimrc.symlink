@@ -13,10 +13,11 @@ set ideajoin
 set number
 
 set visualbell
-set noerrorbells
+" set noerrorbells
 
 # vim plugins
 set easymotion
+set NERDTree
 set surround
 set multiple-cursors
 set argtextob
@@ -33,7 +34,7 @@ set ignorecase " case insensitive searching
 set smartcase " case-sensitive if expresson contains a capital letter
 set hlsearch " highlight search result
 set incsearch " set incremental search, like modern browser
-set magic " Set magic on, for regex
+" set magic " Set magic on, for regex
 
 set clipboard=unnamed
 
@@ -80,7 +81,7 @@ nnoremap <leader><space> :%s/\s\+$//e<CR>
 " Code & Navigation
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <leader>k :action LocateInSolutionView<CR>
+nnoremap <leader>k :NERDTreeFocus<CR>
 nnoremap <leader>f :action ReformatCode<CR>
 
 nnoremap <leader>r :action RenameElement<CR>

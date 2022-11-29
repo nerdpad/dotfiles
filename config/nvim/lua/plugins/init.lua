@@ -199,6 +199,8 @@ Plug "folke/trouble.nvim"
 
 Plug("fatih/vim-go", {["do"] = ":GoUpdateBinaries"})
 
+Plug "jlcrochet/vim-cs"
+
 plugEnd()
 
 -- Once the plugins have been loaded, Lua-based plugins need to be required and started up
